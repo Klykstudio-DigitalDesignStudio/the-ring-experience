@@ -1,0 +1,23 @@
+name: experience-content
+version: 1
+fields:
+  - key: language
+    type: string
+    required: true
+    default: en
+  - key: heroTitle
+    type: string
+    required: true
+  - key: heroSubtitle
+    type: text
+    required: true
+  - key: bookingLink
+    type: string
+    required: false
+  - key: highlights
+    type: list
+    itemType: string
+    required: false
+notes: |
+  Placeholder schema for future serverless/content functions.
+  This file is intentionally static and not yet connected to Vue pages.

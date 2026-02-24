@@ -1,0 +1,30 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: site_content
+    label: Site Content
+    files:
+      - label: Homepage
+        name: homepage
+        file: content/homepage.yml
+        fields:
+          - { label: Headline, name: headline, widget: string }
+          - { label: Subheadline, name: subheadline, widget: text }
+          - { label: Hero Image, name: heroImage, widget: image, required: false }
+      - label: About
+        name: about
+        file: content/about.yml
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Description, name: description, widget: text }
+      - label: Booking
+        name: booking
+        file: content/booking.yml
+        fields:
+          - { label: CTA Title, name: ctaTitle, widget: string }
+          - { label: CTA Text, name: ctaText, widget: text }

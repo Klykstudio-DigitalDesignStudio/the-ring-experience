@@ -1,0 +1,52 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url(https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap);
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-display {
+  font-family: 'Playfair Display', serif;
+}
+
+
+:root {
+  --color-base: #E6DDD1;
+  --color-lightbeige: #F4EFE8;
+  --color-brown: #4B2F1D;
+  --color-noisette: #B08942;
+  --color-darkbrown: #2A1E17;
+  --color-darkbeige: #CFC7BB;
+
+  /* Optional dark variant */
+  /* --color-bg: #171210; */
+  /* --color-section-bg: #2A1E17; */
+  /* --color-text: #F4EFE8; */
+  /* --color-primary: #4B2F1D; */
+  /* --color-muted: #8C8277; */
+}
+
+.color-base {
+  color: var(--color-base);
+}
+.base {
+  background-color: var(--color-base);
+}
+.lightbeige {
+  background-color: var(--color-lightbeige);
+}
+.brown {
+  background-color: var(--color-brown);
+}
+.noisette {
+  background-color: var(--color-noisette);
+}
+.darkbrown {
+  background-color: var(--color-darkbrown);
+}
+.darkbeige {
+  background-color: var(--color-darkbeige);
+}
