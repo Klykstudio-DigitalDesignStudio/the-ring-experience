@@ -8,21 +8,21 @@
       "title": "Design",
       "lineOne": "You sketch it",
       "lineTwo": "You shape the story",
-      "image": "/the-ring-experience-logo.svg"
+      "image": "/uploads/the-experience-2-.png"
     },
     {
       "key": "craft",
       "title": "Craft",
       "lineOne": "You forge it",
       "lineTwo": "You feel every spark",
-      "image": "/the-ring-experience-logo.svg"
+      "image": "/uploads/the-experience-1-.png"
     },
     {
       "key": "seal",
       "title": "Seal",
       "lineOne": "You wear it",
       "lineTwo": "You keep the memory",
-      "image": "/the-ring-experience-logo.svg"
+      "image": "/uploads/the-experience.png"
     }
   ]
 }
