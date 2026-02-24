@@ -1,5 +1,5 @@
 <template>
-    <article class="group experience-card relative h-[24rem] w-full overflow-hidden sm:h-[28rem] lg:h-[34rem]">
+    <article class="group experience-card relative h-96 w-full overflow-hidden sm:h-112 lg:h-136">
         <img :src="image" :alt="title"
             class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 ease-out md:group-hover:scale-105">
 

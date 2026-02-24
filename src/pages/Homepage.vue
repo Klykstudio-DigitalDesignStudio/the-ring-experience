@@ -1,7 +1,7 @@
 <template>
     <main ref="homepageRoot">
         <section id="hero"
-            class="relative flex min-h-svh w-full items-end overflow-hidden bg-black py-28 sm:pb-16 sm:pt-32 lg:h-screen lg:min-h-0 lg:pb-20">
+            class="relative flex min-h-svh w-full items-end overflow-hidden bg-black pb-40 pt-28 sm:pt-32 lg:h-screen lg:min-h-0">
             <img :src="heroContent.image" alt="Hero Cover Image"
                 class="absolute inset-0 h-full w-full object-cover object-center opacity-72">
             <div class="hero-orb hero-orb-left"></div>
