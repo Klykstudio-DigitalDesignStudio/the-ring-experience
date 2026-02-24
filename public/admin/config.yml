@@ -11,11 +11,23 @@ collections:
     files:
       - label: Homepage
         name: homepage
-        file: content/homepage.yml
+        file: content/homepage.json
         fields:
           - { label: Headline, name: headline, widget: string }
           - { label: Subheadline, name: subheadline, widget: text }
           - { label: Hero Image, name: heroImage, widget: image, required: false }
+          - label: Experience Cards
+            name: experienceCards
+            widget: list
+            min: 3
+            max: 3
+            summary: "{{fields.title}}"
+            fields:
+              - { label: Key, name: key, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Line One, name: lineOne, widget: string }
+              - { label: Line Two, name: lineTwo, widget: string }
+              - { label: Image, name: image, widget: image, required: false }
       - label: About
         name: about
         file: content/about.yml

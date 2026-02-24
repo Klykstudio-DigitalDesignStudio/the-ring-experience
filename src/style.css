@@ -50,3 +50,10 @@
 .darkbeige {
   background-color: var(--color-darkbeige);
 }
+
+body {
+  color: var(--color-darkbrown);
+  background-color: var(--color-lightbeige);
+  font-size: 18px;
+  font-weight: 350;
+}

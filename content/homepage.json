@@ -1,0 +1,28 @@
+{
+  "headline": "Create your own sterling silver ring in Sri Lanka",
+  "subheadline": "A meaningful travel memory beyond the usual souvenir",
+  "heroImage": "",
+  "experienceCards": [
+    {
+      "key": "design",
+      "title": "Design",
+      "lineOne": "You sketch it",
+      "lineTwo": "You shape the story",
+      "image": "/the-ring-experience-logo.svg"
+    },
+    {
+      "key": "craft",
+      "title": "Craft",
+      "lineOne": "You forge it",
+      "lineTwo": "You feel every spark",
+      "image": "/the-ring-experience-logo.svg"
+    },
+    {
+      "key": "seal",
+      "title": "Seal",
+      "lineOne": "You wear it",
+      "lineTwo": "You keep the memory",
+      "image": "/the-ring-experience-logo.svg"
+    }
+  ]
+}
