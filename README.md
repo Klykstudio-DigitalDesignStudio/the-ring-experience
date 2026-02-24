@@ -76,21 +76,21 @@ Per permettere in seguito al cliente di caricare contenuti, è stata predisposta
 
 Nota: la connessione dei contenuti CMS alle pagine Vue **non è ancora implementata** (fase successiva).
 
-### Auth GitHub corretta (Netlify + Decap)
+### Setup GitHub OAuth for Decap (Netlify auth provider)
 
-La configurazione del CMS usa `backend: github` in `public/admin/config.yml`.
+1. GitHub -> `Settings` -> `Developer settings` -> `OAuth Apps` -> `New OAuth App`.
+   - `Homepage URL`: `https://<site>.netlify.app` (o dominio custom)
+   - `Authorization callback URL`: `https://api.netlify.com/auth/done`
+   - Copiare `Client ID` e `Client Secret`
+2. Netlify: configurare il provider di autenticazione GitHub (non usare env vars progetto per questo step).
+   - Percorso tipico: `Site configuration` / `Access & security` / `OAuth`
+   - In alternativa: Team/User settings -> Applications/OAuth
+   - Inserire `Client ID` + `Client Secret`
+3. Permessi repository: aggiungere il cliente come collaborator con permesso `Write`.
+4. Test: aprire `https://<site>/admin`, login con GitHub, fare `Publish` di una modifica.
+   - Il commit deve finire su branch `cms` (non su `main`).
 
-Per autenticare il cliente con GitHub nel modo corretto:
-
-1. Crea una GitHub OAuth App con:
-	- `Homepage URL`: `https://<site>.netlify.app` (o dominio custom)
-	- `Authorization callback URL`: `https://api.netlify.com/auth/done`
-2. Su Netlify apri il sito e configura il provider di autenticazione GitHub inserendo:
-	- GitHub OAuth App `Client ID`
-	- GitHub OAuth App `Client Secret`
-3. Aggiungi il cliente come collaborator GitHub del repo con permesso `Write`.
-
-Importante: la `Client Secret` va inserita solo su Netlify, mai nel repository.
+Nota deploy credits: tenere `main` come production branch Netlify e pubblicare da CMS su `cms` evita deploy in produzione durante i test.
 
 ## Prossimi step consigliati
 
