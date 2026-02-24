@@ -73,7 +73,6 @@ Per permettere in seguito al cliente di caricare contenuti, è stata predisposta
 - `content/homepage.yml`
 - `content/about.yml`
 - `content/booking.yml`
-- `public/functions/experience-content-schema.yml` (schema placeholder)
 
 Nota: la connessione dei contenuti CMS alle pagine Vue **non è ancora implementata** (fase successiva).
 
