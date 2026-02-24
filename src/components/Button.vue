@@ -12,7 +12,7 @@ const props = defineProps({
     variant: {
         type: String,
         default: 'solid',
-        validator: (value) => ['solid', 'outline'].includes(value)
+        validator: (value) => ['solid', 'outline', 'nav', 'navLight'].includes(value)
     },
     size: {
         type: String,
@@ -30,7 +30,7 @@ const props = defineProps({
 });
 
 const baseClasses =
-    'group inline-flex items-center justify-center rounded-full uppercase tracking-[0.08em] transition-colors duration-300 ease-out active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60';
+    'group inline-flex cursor-pointer items-center justify-center rounded-full uppercase tracking-[0.08em] transition-colors duration-300 ease-out active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60';
 
 const sizeClasses = {
     sm: 'px-4 py-2 text-xs md:text-sm',
@@ -41,7 +41,11 @@ const variantClasses = {
     solid:
         'noisette text-white hover:brightness-105',
     outline:
-        'border border-[#B08942] text-[#B08942] bg-transparent hover:bg-[#B08942] hover:text-white'
+        'border border-[#B08942] text-[#B08942] bg-transparent hover:bg-[#B08942] hover:text-white',
+    nav:
+        'border border-[#2A1E17] bg-[#2A1E17] text-[#F4EFE8] hover:bg-[#3B2B21]',
+    navLight:
+        'border border-[#F4EFE8]/80 bg-[#F4EFE8]/10 text-[#F4EFE8] hover:bg-[#F4EFE8]/20'
 };
 
 </script>

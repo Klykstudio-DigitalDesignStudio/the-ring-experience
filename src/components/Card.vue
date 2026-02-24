@@ -1,16 +1,17 @@
 <template>
-    <article class="group experience-card relative h-140 w-full overflow-hidden">
-        <img :src="image" :alt="title" class="absolute inset-0 h-full w-full object-cover object-center">
+    <article class="group experience-card relative h-[24rem] w-full overflow-hidden sm:h-[28rem] lg:h-[34rem]">
+        <img :src="image" :alt="title"
+            class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 ease-out md:group-hover:scale-105">
 
         <div
-            class="absolute inset-x-0 bottom-0 h-1/2 bg-[#C8B49C]/95 opacity-100 md:inset-0 md:h-full md:opacity-0 md:transition-opacity md:duration-500 md:ease-out md:group-hover:opacity-100">
+            class="absolute inset-x-0 bottom-0 h-[48%] bg-[#C8B49C]/95 opacity-100 sm:h-[52%] md:inset-0 md:h-full md:opacity-0 md:transition-opacity md:duration-500 md:ease-out md:group-hover:opacity-100">
         </div>
 
         <div
-            class="absolute inset-x-0 bottom-0 z-10 flex h-1/2 flex-col items-center justify-center px-6 text-center text-[#2A1E17] opacity-100 md:inset-0 md:h-full md:translate-y-8 md:opacity-0 md:transition-all md:duration-500 md:ease-out md:group-hover:translate-y-0 md:group-hover:opacity-100">
-            <h3 class="font-display text-4xl font-medium md:text-5xl">{{ title }}</h3>
-            <p class="mt-4">{{ lineOne }}</p>
-            <p>{{ lineTwo }}</p>
+            class="absolute inset-x-0 bottom-0 z-10 flex h-[48%] flex-col items-center justify-center px-5 text-center text-[#2A1E17] opacity-100 sm:h-[52%] sm:px-6 md:inset-0 md:h-full md:translate-y-8 md:opacity-0 md:transition-all md:duration-500 md:ease-out md:group-hover:translate-y-0 md:group-hover:opacity-100">
+            <h3 class="font-display text-[1.65rem] font-medium sm:text-4xl md:text-5xl">{{ title }}</h3>
+            <p class="mt-2 text-[0.82rem] sm:mt-4 sm:text-base">{{ lineOne }}</p>
+            <p class="text-[0.82rem] sm:text-base">{{ lineTwo }}</p>
         </div>
     </article>
 </template>

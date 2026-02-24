@@ -1,11 +1,21 @@
 <template>
-  <router-view />
+  <Navbar />
+  <main>
+    <router-view />
+  </main>
+  <Footer />
+  <AnalyticsManager />
+  <CookieBanner />
 </template>
 
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
+import AnalyticsManager from './components/AnalyticsManager.vue'
+import CookieBanner from './components/CookieBanner.vue'
+import Footer from './components/Footer.vue'
+import Navbar from './components/Navbar.vue'
 
 const route = useRoute()
 const siteUrl = 'https://the-ring-experience.com'

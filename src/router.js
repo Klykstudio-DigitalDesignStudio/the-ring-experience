@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Homepage from './pages/Homepage.vue'
 import AboutUs from './pages/AboutUs.vue'
 import BookExperience from './pages/BookExperience.vue'
+import PrivacyPolicy from './pages/PrivacyPolicy.vue'
+import CookiePolicy from './pages/CookiePolicy.vue'
 
 const routes = [
     {
@@ -16,7 +18,7 @@ const routes = [
         }
     },
     {
-        path: '/about',
+        path: '/aboutus',
         component: AboutUs,
         meta: {
             seo: {
@@ -26,12 +28,32 @@ const routes = [
         }
     },
     {
-        path: '/book',
+        path: '/bookexperience',
         component: BookExperience,
         meta: {
             seo: {
                 title: 'Prenota l\'Esperienza | The Ring Experience Sri Lanka',
                 description: 'Prenota la tua esperienza di creazione anello in argento sterling in Sri Lanka e porta con te un simbolo personale del tuo viaggio.'
+            }
+        }
+    },
+    {
+        path: '/privacy-policy',
+        component: PrivacyPolicy,
+        meta: {
+            seo: {
+                title: 'Privacy Policy | The Ring Experience Sri Lanka',
+                description: 'Read how The Ring Experience collects and manages personal data for bookings and website use.'
+            }
+        }
+    },
+    {
+        path: '/cookie-policy',
+        component: CookiePolicy,
+        meta: {
+            seo: {
+                title: 'Cookie Policy | The Ring Experience Sri Lanka',
+                description: 'Learn how cookies are used on The Ring Experience website and how to manage your consent.'
             }
         }
     }
