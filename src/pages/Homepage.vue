@@ -1,7 +1,7 @@
 <template>
     <main ref="homepageRoot">
         <section id="hero"
-            class="relative flex min-h-[100svh] w-full items-end overflow-hidden bg-black pb-12 pt-28 sm:pb-16 sm:pt-32 lg:h-screen lg:min-h-0 lg:pb-20">
+            class="relative flex min-h-svh w-full items-end overflow-hidden bg-black py-28 sm:pb-16 sm:pt-32 lg:h-screen lg:min-h-0 lg:pb-20">
             <img :src="heroContent.image" alt="Hero Cover Image"
                 class="absolute inset-0 h-full w-full object-cover object-center opacity-72">
             <div class="hero-orb hero-orb-left"></div>
@@ -30,7 +30,7 @@
                 class="mx-auto grid w-11/12 grid-cols-1 items-center gap-8 sm:w-10/12 sm:gap-10 lg:grid-cols-12 lg:gap-14">
                 <figure class="flex items-center justify-center lg:col-span-7">
                     <img :src="aMomentContent.image" alt="A Moment Image"
-                        class="h-auto max-h-[23rem] w-full rounded-xs object-cover sm:max-h-[28rem] lg:max-h-[40rem]">
+                        class="h-auto max-h-92 w-full rounded-xs object-cover sm:max-h-112 lg:max-h-160">
                 </figure>
                 <div class="flex flex-col justify-center lg:col-span-5 lg:pl-2">
                     <p class="mb-4 text-xs tracking-[0.18em] text-(--color-mutedbrown) uppercase sm:text-sm sm:tracking-[0.2em]">
@@ -61,7 +61,7 @@
                 </div>
                 <div ref="experienceGrid" class="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 xl:grid-cols-3 xl:gap-9">
                     <Card v-for="card in experienceCards" :key="card.key"
-                        class="experience-card mx-auto w-full max-w-[28rem] md:max-w-none"
+                        class="experience-card mx-auto w-full max-w-md md:max-w-none"
                         :title="card.title" :line-one="card.lineOne" :line-two="card.lineTwo" :image="card.image" />
                 </div>
             </div>
