@@ -79,17 +79,17 @@ Nota: la connessione dei contenuti CMS alle pagine Vue **non è ancora implement
 
 ### Auth GitHub corretta (Netlify + Decap)
 
-La configurazione del CMS è già pronta con `backend: git-gateway` in `public/admin/config.yml`.
+La configurazione del CMS usa `backend: github` in `public/admin/config.yml`.
 
 Per autenticare il cliente con GitHub nel modo corretto:
 
-1. Su Netlify apri il sito → **Identity** → abilita **Identity**.
-2. In **Identity > Registration** scegli `Invite only` (consigliato) o `Open`.
-3. In **Identity > Services** abilita **Git Gateway**.
-4. In **Identity > External providers** abilita **GitHub** e inserisci:
+1. Crea una GitHub OAuth App con:
+	- `Homepage URL`: `https://<site>.netlify.app` (o dominio custom)
+	- `Authorization callback URL`: `https://api.netlify.com/auth/done`
+2. Su Netlify apri il sito e configura il provider di autenticazione GitHub inserendo:
 	- GitHub OAuth App `Client ID`
 	- GitHub OAuth App `Client Secret`
-5. Invita gli utenti admin dalla sezione Identity.
+3. Aggiungi il cliente come collaborator GitHub del repo con permesso `Write`.
 
 Importante: la `Client Secret` va inserita solo su Netlify, mai nel repository.
 
@@ -98,4 +98,5 @@ Importante: la `Client Secret` va inserita solo su Netlify, mai nel repository.
 1. Sostituire le immagini SVG social con immagini reali brandizzate.
 2. Configurare dominio definitivo e aggiornare tutti gli URL canonici/sitemap.
 3. Collegare i file `content/*.yml` ai componenti Vue.
-4. Attivare autenticazione Netlify Identity/Git Gateway per l'admin CMS.
+4. Verificare login Decap via GitHub su `/admin` dopo deploy.
+

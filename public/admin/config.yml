@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: Klykstudio-DigitalDesignStudio/the-ring-experience
   branch: main
 
 media_folder: public/uploads
