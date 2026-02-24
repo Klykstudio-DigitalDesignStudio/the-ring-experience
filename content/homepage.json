@@ -2,7 +2,7 @@
   "hero": {
     "headline": "Every ring begins with a choice",
     "subheadline": "A meaningful travel memory beyond the usual",
-    "image": "/uploads/herocover.jpeg",
+    "image": "/uploads/whatsapp-image-2026-02-24-at-10.43.29-1-.jpeg",
     "buttonLabel": "Book your experience",
     "buttonLink": "/bookexperience"
   },
@@ -11,7 +11,7 @@
     "title": "Not a store. A memory you create together.",
     "paragraphOne": "Two seats, one table, raw silver, open flame.",
     "paragraphTwo": "You do not buy a ring. You craft it, side by side, together.",
-    "image": "/uploads/herocover.jpeg"
+    "image": "/uploads/the-experience-3-.png"
   },
   "experienceCards": [
     {
@@ -38,7 +38,7 @@
   ],
   "values": {
     "heading": "Our Values",
-    "backgroundImage": "/uploads/herocover.jpeg",
+    "backgroundImage": "/uploads/pexels-keeganjchecks-30321755.jpg",
     "items": [
       {
         "title": "Authenticity",
@@ -62,7 +62,7 @@
     "eyebrow": "Follow Us",
     "heading": "Follow our journey",
     "description": "Behind the scenes, new stories, and handcrafted moments from Sri Lanka.",
-    "backgroundImage": "/uploads/herocover.jpeg",
+    "backgroundImage": "/uploads/pexels-goran-vrakela-64248-230289.jpg",
     "links": [
       {
         "label": "Instagram",
@@ -81,7 +81,7 @@
   "reviews": {
     "eyebrow": "Guest Reviews",
     "heading": "What people say about the experience",
-    "description": "",
+    "description": "In a world full of hyper-activity, you can decide to slow down",
     "sourceLabel": "Google Business",
     "sourceUrl": "",
     "items": [
