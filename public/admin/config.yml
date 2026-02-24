@@ -2,6 +2,9 @@ backend:
   name: github
   repo: Klykstudio-DigitalDesignStudio/the-ring-experience
   branch: main
+  site_domain: the-ring-experience.netlify.app
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
 
 media_folder: public/uploads
 public_folder: /uploads
