@@ -168,13 +168,14 @@
 </template>
 
 <script setup>
-import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Button from '../components/Button.vue';
 import Card from '../components/Card.vue';
 import heroFallbackImage from '../assets/herocover.jpeg';
-import homepageContent from '../../content/homepage.json';
+import localHomepageContent from '../../content/homepage.json';
+import { fetchHomepageContentFromSanity } from '../utils/sanity';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -218,9 +219,7 @@ const fallbackCards = [
     }
 ];
 
-const experienceCards = Array.isArray(homepageContent?.experienceCards) && homepageContent.experienceCards.length
-    ? homepageContent.experienceCards
-    : fallbackCards;
+const cmsHomepageContent = ref(localHomepageContent);
 
 const valuesFallback = {
     heading: 'Our Values',
@@ -266,50 +265,56 @@ const reviewsFallback = {
     items: []
 };
 
-const heroContent = {
+const experienceCards = computed(() => (
+    Array.isArray(cmsHomepageContent.value?.experienceCards) && cmsHomepageContent.value.experienceCards.length
+        ? cmsHomepageContent.value.experienceCards
+        : fallbackCards
+));
+
+const heroContent = computed(() => ({
     ...heroFallback,
-    ...(homepageContent?.hero ?? {})
-};
+    ...(cmsHomepageContent.value?.hero ?? {})
+}));
 
-const aMomentContent = {
+const aMomentContent = computed(() => ({
     ...aMomentFallback,
-    ...(homepageContent?.aMoment ?? {})
-};
+    ...(cmsHomepageContent.value?.aMoment ?? {})
+}));
 
-const valuesContent = {
+const valuesContent = computed(() => ({
     ...valuesFallback,
-    ...(homepageContent?.values ?? {}),
-    items: Array.isArray(homepageContent?.values?.items) && homepageContent.values.items.length
-        ? homepageContent.values.items
+    ...(cmsHomepageContent.value?.values ?? {}),
+    items: Array.isArray(cmsHomepageContent.value?.values?.items) && cmsHomepageContent.value.values.items.length
+        ? cmsHomepageContent.value.values.items
         : valuesFallback.items
-};
+}));
 
-const followUsContent = {
+const followUsContent = computed(() => ({
     ...followUsFallback,
-    ...(homepageContent?.followUs ?? {}),
-    links: Array.isArray(homepageContent?.followUs?.links) && homepageContent.followUs.links.length
-        ? homepageContent.followUs.links
+    ...(cmsHomepageContent.value?.followUs ?? {}),
+    links: Array.isArray(cmsHomepageContent.value?.followUs?.links) && cmsHomepageContent.value.followUs.links.length
+        ? cmsHomepageContent.value.followUs.links
         : followUsFallback.links
-};
+}));
 
-const reviewsContent = {
+const reviewsContent = computed(() => ({
     ...reviewsFallback,
-    ...(homepageContent?.reviews ?? {}),
-    items: Array.isArray(homepageContent?.reviews?.items)
-        ? homepageContent.reviews.items
+    ...(cmsHomepageContent.value?.reviews ?? {}),
+    items: Array.isArray(cmsHomepageContent.value?.reviews?.items)
+        ? cmsHomepageContent.value.reviews.items
         : reviewsFallback.items
-};
+}));
 
-const valuesItems = valuesContent.items;
-const reviewsItems = reviewsContent.items;
+const valuesItems = computed(() => valuesContent.value.items);
+const reviewsItems = computed(() => reviewsContent.value.items);
 
-const valuesBgStyle = {
-    backgroundImage: `url(${valuesContent.backgroundImage})`
-};
+const valuesBgStyle = computed(() => ({
+    backgroundImage: `url(${valuesContent.value.backgroundImage})`
+}));
 
-const followUsBgStyle = {
-    backgroundImage: `url(${followUsContent.backgroundImage})`
-};
+const followUsBgStyle = computed(() => ({
+    backgroundImage: `url(${followUsContent.value.backgroundImage})`
+}));
 
 const homepageRoot = ref(null);
 const experienceGrid = ref(null);
@@ -403,6 +408,11 @@ const setupHomepageAnimations = () => {
 };
 
 onMounted(async () => {
+    const sanityHomepage = await fetchHomepageContentFromSanity();
+    if (sanityHomepage) {
+        cmsHomepageContent.value = sanityHomepage;
+    }
+
     await nextTick();
     setupHomepageAnimations();
 });

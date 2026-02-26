@@ -55,6 +55,33 @@ Il frontend e completamente statico client-side e deployabile su Cloudflare Page
 
 La gestione contenuti avviene tramite Sanity Studio deployato separatamente su `cms.<dominio>`.
 
+## Setup Sanity (Free Plan)
+
+1. Crea il progetto Sanity (free):
+```bash
+npm create sanity@latest
+```
+2. Nel progetto Studio, importa lo schema homepage:
+- copia `sanity/schemaTypes/homepage.js`
+- copia `sanity/schemaTypes/index.js`
+- registra `schemaTypes` nel tuo `sanity.config.*`
+3. Deploy Studio su `cms.<dominio>` (es. Sanity Hosted Studio o hosting esterno).
+4. Inserisci le variabili del frontend:
+- duplica `.env.example` in `.env`
+- valorizza `VITE_SANITY_PROJECT_ID` con l'ID reale del progetto
+
+## Integrazione Homepage
+
+- La homepage ora tenta prima il fetch da Sanity (`src/utils/sanity.js`).
+- Se Sanity non e configurato o non risponde, usa fallback locale da `content/homepage.json`.
+- Il cliente puo aggiornare da Sanity:
+  - Hero (testi, CTA, immagine)
+  - A Moment (testi, immagine)
+  - Experience Cards (titoli, linee, immagini)
+  - Values (heading, background, 4 item)
+  - Follow Us (testi, background, link social)
+  - Reviews (heading, descrizioni, lista recensioni)
+
 ## Prossimi step consigliati
 
 1. Sostituire le immagini social con asset brandizzati.
