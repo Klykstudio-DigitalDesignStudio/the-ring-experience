@@ -46,15 +46,15 @@
         <span class="relative block h-4 w-5">
           <span
             class="absolute top-0 left-0 h-0.5 w-full bg-current transition-transform duration-300"
-            :class="isMobileOpen ? 'translate-y-[7px] rotate-45' : ''"
+            :class="isMobileOpen ? 'translate-y-1.75 rotate-45' : ''"
           ></span>
           <span
-            class="absolute top-[7px] left-0 h-0.5 w-full bg-current transition-opacity duration-300"
+            class="absolute top-1.75 left-0 h-0.5 w-full bg-current transition-opacity duration-300"
             :class="isMobileOpen ? 'opacity-0' : 'opacity-100'"
           ></span>
           <span
-            class="absolute top-[14px] left-0 h-0.5 w-full bg-current transition-transform duration-300"
-            :class="isMobileOpen ? '-translate-y-[7px] -rotate-45' : ''"
+            class="absolute top-3.5 left-0 h-0.5 w-full bg-current transition-transform duration-300"
+            :class="isMobileOpen ? '-translate-y-1.75 -rotate-45' : ''"
           ></span>
         </span>
       </button>
