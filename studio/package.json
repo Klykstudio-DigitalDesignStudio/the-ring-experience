@@ -8,9 +8,10 @@
     "build": "sanity build && node scripts/ensure-admin-basepath.mjs"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "sanity": "^3.88.1",
-    "styled-components": "^6.1.15"
+    "react": "^19.2.2",
+    "react-dom": "^19.2.2",
+    "sanity": "^5.12.0",
+    "styled-components": "^6.1.15",
+    "the-ring-experience": "file:.."
   }
 }
