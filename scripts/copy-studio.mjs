@@ -1,11 +1,12 @@
-import { cp, mkdir, rm } from 'node:fs/promises';
-import { access } from 'node:fs/promises';
+import { access, cp, mkdir, rm } from 'node:fs/promises';
 import { constants } from 'node:fs';
 import path from 'node:path';
 
-const rootDir = process.cwd();
-const studioDistDir = path.join(rootDir, 'studio', 'dist');
-const targetAdminDir = path.join(rootDir, 'dist', 'admin');
+const rootDist = path.resolve('dist');
+const studioDist = path.resolve('studio', 'dist');
+const adminDist = path.resolve('dist', 'admin');
+const studioIndex = path.join(studioDist, 'index.html');
+const adminIndex = path.join(adminDist, 'index.html');
 
 async function exists(targetPath) {
     try {
@@ -16,10 +17,19 @@ async function exists(targetPath) {
     }
 }
 
-if (!(await exists(studioDistDir))) {
-    throw new Error(`Studio build not found at ${studioDistDir}`);
+if (!(await exists(studioDist))) {
+    throw new Error(`Sanity Studio build folder not found: ${studioDist}`);
 }
 
-await rm(targetAdminDir, { recursive: true, force: true });
-await mkdir(targetAdminDir, { recursive: true });
-await cp(studioDistDir, targetAdminDir, { recursive: true });
+if (!(await exists(studioIndex))) {
+    throw new Error(`Sanity Studio build is missing index.html: ${studioIndex}`);
+}
+
+await mkdir(rootDist, { recursive: true });
+await rm(adminDist, { recursive: true, force: true });
+await mkdir(adminDist, { recursive: true });
+await cp(studioDist, adminDist, { recursive: true, force: true });
+
+if (!(await exists(adminIndex))) {
+    throw new Error(`Copy failed: missing ${adminIndex}`);
+}
