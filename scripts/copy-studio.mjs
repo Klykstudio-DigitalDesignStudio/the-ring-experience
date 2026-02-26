@@ -1,4 +1,4 @@
-import { access, cp, mkdir, rm } from 'node:fs/promises';
+import { access, cp, mkdir, readFile, rm } from 'node:fs/promises';
 import { constants } from 'node:fs';
 import path from 'node:path';
 
@@ -23,6 +23,14 @@ if (!(await exists(studioDist))) {
 
 if (!(await exists(studioIndex))) {
     throw new Error(`Sanity Studio build is missing index.html: ${studioIndex}`);
+}
+
+const studioIndexHtml = await readFile(studioIndex, 'utf8');
+if (studioIndexHtml.includes('src="/static/') || studioIndexHtml.includes('href="/static/')) {
+    throw new Error('Sanity Studio build has invalid absolute /static paths. Expected /admin/static/ paths.');
+}
+if (!studioIndexHtml.includes('/admin/static/')) {
+    throw new Error('Sanity Studio build does not include /admin/static/ asset paths.');
 }
 
 await mkdir(rootDist, { recursive: true });

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "sanity dev",
-    "build": "sanity build"
+    "build": "sanity build && node scripts/ensure-admin-basepath.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",
