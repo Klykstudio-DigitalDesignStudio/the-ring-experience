@@ -64,11 +64,32 @@ const HOMEPAGE_QUERY = `
 }
 `;
 
+const FOOTER_QUERY = `
+*[_type == "footer"][0]{
+  subtitle,
+  title,
+  text,
+  phone,
+  phoneLabel,
+  email
+}
+`;
+
 export async function fetchHomepageContentFromSanity() {
     if (!import.meta.env.VITE_SANITY_PROJECT_ID || !import.meta.env.VITE_SANITY_DATASET) return null;
 
     try {
         return await sanity.fetch(HOMEPAGE_QUERY);
+    } catch {
+        return null;
+    }
+}
+
+export async function fetchFooterContentFromSanity() {
+    if (!import.meta.env.VITE_SANITY_PROJECT_ID || !import.meta.env.VITE_SANITY_DATASET) return null;
+
+    try {
+        return await sanity.fetch(FOOTER_QUERY);
     } catch {
         return null;
     }

@@ -20,7 +20,7 @@ export default {
             title: 'A Moment',
             type: 'object',
             fields: [
-                { name: 'eyebrow', title: 'Eyebrow', type: 'string' },
+                { name: 'eyebrow', title: 'Subtitle', type: 'string' },
                 { name: 'title', title: 'Title', type: 'string' },
                 { name: 'paragraphOne', title: 'Paragraph One', type: 'text', rows: 3 },
                 { name: 'paragraphTwo', title: 'Paragraph Two', type: 'text', rows: 3 },
@@ -41,6 +41,9 @@ export default {
                     { name: 'image', title: 'Image', type: 'image', options: { hotspot: true } }
                 ]
             }],
+            options: {
+                disableActions: ['add', 'remove', 'duplicate', 'copy']
+            },
             validation: (Rule) => Rule.min(3).max(3)
         },
         {
@@ -61,6 +64,9 @@ export default {
                             { name: 'text', title: 'Text', type: 'text', rows: 3 }
                         ]
                     }],
+                    options: {
+                        disableActions: ['add', 'remove', 'duplicate', 'copy']
+                    },
                     validation: (Rule) => Rule.min(4).max(4)
                 }
             ]
@@ -70,7 +76,7 @@ export default {
             title: 'Follow Us',
             type: 'object',
             fields: [
-                { name: 'eyebrow', title: 'Eyebrow', type: 'string' },
+                { name: 'eyebrow', title: 'Subtitle', type: 'string' },
                 { name: 'heading', title: 'Heading', type: 'string' },
                 { name: 'description', title: 'Description', type: 'text', rows: 3 },
                 { name: 'backgroundImage', title: 'Background Image', type: 'image', options: { hotspot: true } },
@@ -84,7 +90,10 @@ export default {
                             { name: 'label', title: 'Label', type: 'string' },
                             { name: 'href', title: 'URL', type: 'url' }
                         ]
-                    }]
+                    }],
+                    options: {
+                        disableActions: ['duplicate', 'copy']
+                    }
                 }
             ]
         },
@@ -93,7 +102,7 @@ export default {
             title: 'Reviews',
             type: 'object',
             fields: [
-                { name: 'eyebrow', title: 'Eyebrow', type: 'string' },
+                { name: 'eyebrow', title: 'Subtitle', type: 'string' },
                 { name: 'heading', title: 'Heading', type: 'string' },
                 { name: 'description', title: 'Description', type: 'text', rows: 3 },
                 { name: 'sourceLabel', title: 'Source Label', type: 'string' },
@@ -110,7 +119,10 @@ export default {
                             { name: 'text', title: 'Text', type: 'text', rows: 4 },
                             { name: 'dateLabel', title: 'Date Label', type: 'string' }
                         ]
-                    }]
+                    }],
+                    options: {
+                        disableActions: ['duplicate', 'copy']
+                    }
                 }
             ]
         }
