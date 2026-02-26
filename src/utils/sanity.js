@@ -23,6 +23,10 @@ const HOMEPAGE_QUERY = `
     paragraphTwo,
     "image": image.asset->url
   },
+  theExperience{
+    eyebrow,
+    title
+  },
   experienceCards[]{
     key,
     title,

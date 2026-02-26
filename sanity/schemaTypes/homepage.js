@@ -28,6 +28,15 @@ export default {
             ]
         },
         {
+            name: 'theExperience',
+            title: 'The Experience',
+            type: 'object',
+            fields: [
+                { name: 'eyebrow', title: 'Subtitle', type: 'string' },
+                { name: 'title', title: 'Title', type: 'string' }
+            ]
+        },
+        {
             name: 'experienceCards',
             title: 'Experience Cards',
             type: 'array',
@@ -65,7 +74,7 @@ export default {
                         ]
                     }],
                     options: {
-                        disableActions: ['add', 'remove', 'duplicate', 'copy']
+                        disableActions: ['duplicate', 'copy']
                     },
                     validation: (Rule) => Rule.min(4).max(4)
                 }

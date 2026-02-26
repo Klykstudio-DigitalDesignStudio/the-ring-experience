@@ -54,9 +54,9 @@
         <section id="theExperience" data-reveal class="w-full pb-20 sm:pb-24 lg:pb-36">
             <div class="mx-auto w-11/12 sm:w-10/12">
                 <div class="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
-                    <p class="text-xs tracking-[0.2em] text-(--color-mutedbrown) uppercase">The Experience</p>
+                    <p class="text-xs tracking-[0.2em] text-(--color-mutedbrown) uppercase">{{ theExperienceContent.eyebrow }}</p>
                     <h2 class="mt-3 font-display text-4xl leading-tight text-(--color-brown) sm:text-5xl">
-                        Crafted by your hands, not picked from a shelf
+                        {{ theExperienceContent.title }}
                     </h2>
                 </div>
                 <div ref="experienceGrid" class="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 xl:grid-cols-3 xl:gap-9">
@@ -219,6 +219,11 @@ const fallbackCards = [
     }
 ];
 
+const theExperienceFallback = {
+    eyebrow: 'The Experience',
+    title: 'Crafted by your hands, not picked from a shelf'
+};
+
 const cmsHomepageContent = ref(localHomepageContent);
 
 const valuesFallback = {
@@ -279,6 +284,11 @@ const heroContent = computed(() => ({
 const aMomentContent = computed(() => ({
     ...aMomentFallback,
     ...(cmsHomepageContent.value?.aMoment ?? {})
+}));
+
+const theExperienceContent = computed(() => ({
+    ...theExperienceFallback,
+    ...(cmsHomepageContent.value?.theExperience ?? {})
 }));
 
 const valuesContent = computed(() => ({
