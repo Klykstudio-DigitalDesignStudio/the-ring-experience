@@ -42,7 +42,7 @@ export default {
                 ]
             }],
             options: {
-                disableActions: ['add', 'remove', 'duplicate', 'copy']
+                disableActions: ['duplicate', 'copy']
             },
             validation: (Rule) => Rule.min(3).max(3)
         },
