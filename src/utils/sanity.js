@@ -75,6 +75,12 @@ const FOOTER_QUERY = `
 }
 `;
 
+const NAVBAR_QUERY = `
+*[_type == "navbar"][0]{
+  "logoSvgUrl": logoSvg.asset->url
+}
+`;
+
 export async function fetchHomepageContentFromSanity() {
     if (!import.meta.env.VITE_SANITY_PROJECT_ID || !import.meta.env.VITE_SANITY_DATASET) return null;
 
@@ -90,6 +96,16 @@ export async function fetchFooterContentFromSanity() {
 
     try {
         return await sanity.fetch(FOOTER_QUERY);
+    } catch {
+        return null;
+    }
+}
+
+export async function fetchNavbarContentFromSanity() {
+    if (!import.meta.env.VITE_SANITY_PROJECT_ID || !import.meta.env.VITE_SANITY_DATASET) return null;
+
+    try {
+        return await sanity.fetch(NAVBAR_QUERY);
     } catch {
         return null;
     }

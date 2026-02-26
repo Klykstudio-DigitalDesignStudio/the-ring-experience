@@ -12,7 +12,7 @@ export default {
                 { name: 'subheadline', title: 'Subheadline', type: 'text', rows: 3 },
                 { name: 'buttonLabel', title: 'Button Label', type: 'string' },
                 { name: 'buttonLink', title: 'Button Link', type: 'string', initialValue: '/bookexperience' },
-                { name: 'image', title: 'Image', type: 'image', options: { hotspot: true } }
+                { name: 'image', title: 'Image', type: 'image', options: { hotspot: true, accept: 'image/webp' } }
             ]
         },
         {
@@ -24,7 +24,7 @@ export default {
                 { name: 'title', title: 'Title', type: 'string' },
                 { name: 'paragraphOne', title: 'Paragraph One', type: 'text', rows: 3 },
                 { name: 'paragraphTwo', title: 'Paragraph Two', type: 'text', rows: 3 },
-                { name: 'image', title: 'Image', type: 'image', options: { hotspot: true } }
+                { name: 'image', title: 'Image', type: 'image', options: { hotspot: true, accept: 'image/webp' } }
             ]
         },
         {
@@ -38,7 +38,7 @@ export default {
                     { name: 'title', title: 'Title', type: 'string' },
                     { name: 'lineOne', title: 'Line One', type: 'string' },
                     { name: 'lineTwo', title: 'Line Two', type: 'string' },
-                    { name: 'image', title: 'Image', type: 'image', options: { hotspot: true } }
+                    { name: 'image', title: 'Image', type: 'image', options: { hotspot: true, accept: 'image/webp' } }
                 ]
             }],
             options: {
@@ -52,7 +52,7 @@ export default {
             type: 'object',
             fields: [
                 { name: 'heading', title: 'Heading', type: 'string' },
-                { name: 'backgroundImage', title: 'Background Image', type: 'image', options: { hotspot: true } },
+                { name: 'backgroundImage', title: 'Background Image', type: 'image', options: { hotspot: true, accept: 'image/webp' } },
                 {
                     name: 'items',
                     title: 'Items',
@@ -79,7 +79,7 @@ export default {
                 { name: 'eyebrow', title: 'Subtitle', type: 'string' },
                 { name: 'heading', title: 'Heading', type: 'string' },
                 { name: 'description', title: 'Description', type: 'text', rows: 3 },
-                { name: 'backgroundImage', title: 'Background Image', type: 'image', options: { hotspot: true } },
+                { name: 'backgroundImage', title: 'Background Image', type: 'image', options: { hotspot: true, accept: 'image/webp' } },
                 {
                     name: 'links',
                     title: 'Links',

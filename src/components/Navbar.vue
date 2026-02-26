@@ -2,14 +2,15 @@
   <header
     class="fixed top-0 right-0 left-0 z-50 border-b transition-all duration-300"
     :class="isSolid
-      ? 'border-[#2A1E17]/12 bg-[#F4EFE8]/95 text-[#2A1E17] backdrop-blur-md'
+      ? 'border-[#2A1E17]/12 bg-(--color-lightbeige) text-[#2A1E17] backdrop-blur-md'
       : 'border-transparent bg-transparent text-[#F4EFE8]'"
   >
     <div class="mx-auto flex h-18 w-11/12 items-center justify-between sm:w-10/12">
+     
       <RouterLink
         to="/"
-        class="font-display text-xl leading-none font-bold tracking-[0.01em] sm:text-[1.6rem]"
-      >
+        class="flex items-center justify-center font-display text-xl leading-none font-bold tracking-[0.01em] sm:text-[1.6rem]"
+      > <img id="logo" :src="logoSrc" alt="" class="w-14">
         The Ring Experience
       </RouterLink>
 
@@ -97,10 +98,12 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import Button from './Button.vue'
+import { fetchNavbarContentFromSanity } from '../utils/sanity'
 
 const route = useRoute()
 const isMobileOpen = ref(false)
 const hasScrolled = ref(false)
+const logoSrc = ref('/the-ring-experience-logo.svg')
 
 const primaryLinks = [
   { label: 'Home', to: '/' },
@@ -123,6 +126,12 @@ watch(
 onMounted(() => {
   onScroll()
   window.addEventListener('scroll', onScroll, { passive: true })
+
+  fetchNavbarContentFromSanity().then((navbarContent) => {
+    if (navbarContent?.logoSvgUrl) {
+      logoSrc.value = navbarContent.logoSvgUrl
+    }
+  })
 })
 
 onBeforeUnmount(() => {

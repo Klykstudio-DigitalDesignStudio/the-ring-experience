@@ -12,7 +12,7 @@
             <div class="relative z-10 mx-auto w-11/12 sm:w-10/12">
                 <div class="hero-copy flex max-w-5xl flex-col items-center text-center text-white lg:items-start lg:text-left">
                     <h1
-                        class="max-w-5xl font-display text-5xl leading-[0.98] font-medium sm:text-6xl md:text-7xl lg:text-8xl">
+                        class="max-w-5xl font-display text-5xl leading-[0.98] font-medium text-(--color-lightbeige) sm:text-6xl md:text-7xl lg:text-8xl">
                         {{ heroContent.headline }}
                     </h1>
                     <p class="mt-4 max-w-xl text-base font-light text-gray-200 sm:text-lg lg:text-2xl">

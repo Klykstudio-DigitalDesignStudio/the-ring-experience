@@ -2,7 +2,7 @@ import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { schemaTypes } from '../sanity/schemaTypes';
 
-const singletonTypes = new Set(['homepage', 'footer']);
+const singletonTypes = new Set(['homepage', 'footer', 'navbar']);
 
 export default defineConfig({
     name: 'default',
