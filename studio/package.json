@@ -1,0 +1,16 @@
+{
+  "name": "the-ring-experience-studio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sanity": "^3.88.1",
+    "styled-components": "^6.1.15"
+  }
+}
