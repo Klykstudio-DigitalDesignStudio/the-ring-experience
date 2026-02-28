@@ -58,26 +58,6 @@
       }
     ]
   },
-  "followUs": {
-    "eyebrow": "Follow Us",
-    "heading": "Follow our journey",
-    "description": "Behind the scenes, new stories, and handcrafted moments from Sri Lanka.",
-    "backgroundImage": "/uploads/pexels-goran-vrakela-64248-230289.jpg",
-    "links": [
-      {
-        "label": "Instagram",
-        "href": "https://instagram.com"
-      },
-      {
-        "label": "TikTok",
-        "href": "https://tiktok.com"
-      },
-      {
-        "label": "Pinterest",
-        "href": "https://pinterest.com"
-      }
-    ]
-  },
   "reviews": {
     "eyebrow": "Guest Reviews",
     "heading": "What people say about the experience",

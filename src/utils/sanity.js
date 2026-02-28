@@ -42,16 +42,6 @@ const HOMEPAGE_QUERY = `
       text
     }
   },
-  followUs{
-    eyebrow,
-    heading,
-    description,
-    "backgroundImage": backgroundImage.asset->url,
-    links[]{
-      label,
-      href
-    }
-  },
   reviews{
     eyebrow,
     heading,
@@ -64,6 +54,49 @@ const HOMEPAGE_QUERY = `
       text,
       dateLabel
     }
+  }
+}
+`;
+
+const SOCIAL_QUERY = `
+*[_type == "social"][0]{
+  eyebrow,
+  heading,
+  description,
+  "backgroundImage": backgroundImage.asset->url,
+  links[]{
+    label,
+    href
+  }
+}
+`;
+
+const ABOUT_US_QUERY = `
+*[_type == "aboutUs"][0]{
+  hero{
+    eyebrow,
+    title,
+    description,
+    "backgroundImage": backgroundImage.asset->url
+  },
+  approach{
+    eyebrow,
+    title,
+    paragraphOne,
+    paragraphTwo
+  },
+  packagesSection{
+    eyebrow,
+    heading,
+    description,
+    ctaLabel
+  },
+  packages[]{
+    tag,
+    name,
+    duration,
+    description,
+    price
   }
 }
 `;
@@ -100,6 +133,26 @@ export async function fetchFooterContentFromSanity() {
 
     try {
         return await sanity.fetch(FOOTER_QUERY);
+    } catch {
+        return null;
+    }
+}
+
+export async function fetchSocialContentFromSanity() {
+    if (!import.meta.env.VITE_SANITY_PROJECT_ID || !import.meta.env.VITE_SANITY_DATASET) return null;
+
+    try {
+        return await sanity.fetch(SOCIAL_QUERY);
+    } catch {
+        return null;
+    }
+}
+
+export async function fetchAboutUsContentFromSanity() {
+    if (!import.meta.env.VITE_SANITY_PROJECT_ID || !import.meta.env.VITE_SANITY_DATASET) return null;
+
+    try {
+        return await sanity.fetch(ABOUT_US_QUERY);
     } catch {
         return null;
     }

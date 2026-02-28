@@ -138,32 +138,7 @@
                 </p>
             </div>
         </section>
-        <section id="followus" data-reveal class="relative w-full overflow-hidden py-20 sm:py-24 lg:py-28">
-            <div class="pointer-events-none absolute inset-0">
-                <div class="parallax-bg absolute inset-0 bg-cover bg-center" :style="followUsBgStyle"></div>
-                <div class="absolute inset-0 bg-(--color-darkbrown)" style="opacity: 0.64;"></div>
-                <div class="absolute inset-0"
-                    style="background: linear-gradient(to bottom, color-mix(in srgb, var(--color-darkbrown) 42%, transparent), color-mix(in srgb, var(--color-darkbrown) 78%, transparent));">
-                </div>
-            </div>
-            <div class="relative mx-auto w-11/12 max-w-4xl text-center text-(--color-lightbeige) sm:w-10/12">
-                <p class="text-xs tracking-[0.2em] uppercase" style="opacity: 0.78;">{{ followUsContent.eyebrow }}</p>
-                <h2 class="mt-3 font-display text-4xl leading-tight sm:text-5xl">
-                    {{ followUsContent.heading }}
-                </h2>
-                <p class="mx-auto mt-4 max-w-2xl text-base sm:text-lg" style="opacity: 0.88;">
-                    {{ followUsContent.description }}
-                </p>
-                <div class="mx-auto mt-7 h-px w-24 bg-(--color-noisette)"></div>
-                <div class="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-                    <a v-for="social in followUsContent.links" :key="social.label" :href="social.href" target="_blank"
-                        rel="noopener noreferrer" class="group text-base tracking-[0.08em] uppercase sm:text-lg">
-                        <span class="transition-all duration-300 ease-out group-hover:italic">{{ social.label }}</span>
-                        <span class="mt-1 block h-px w-0 bg-(--color-noisette) transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                </div>
-            </div>
-        </section>
+        <SocialSection :content="cmsSocialContent" />
     </main>
 </template>
 
@@ -173,9 +148,11 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Button from '../components/Button.vue';
 import Card from '../components/Card.vue';
+import SocialSection from '../components/SocialSection.vue';
 import heroFallbackImage from '../assets/herocover.jpeg';
 import localHomepageContent from '../../content/homepage.json';
-import { fetchHomepageContentFromSanity } from '../utils/sanity';
+import localSocialContent from '../../content/social.json';
+import { fetchHomepageContentFromSanity, fetchSocialContentFromSanity } from '../utils/sanity';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -225,6 +202,7 @@ const theExperienceFallback = {
 };
 
 const cmsHomepageContent = ref(localHomepageContent);
+const cmsSocialContent = ref(localSocialContent);
 
 const valuesFallback = {
     heading: 'Our Values',
@@ -246,18 +224,6 @@ const valuesFallback = {
             title: 'Meaning',
             text: 'No mass tourism routine. You leave with something personal, made by hand and owned by your story.'
         }
-    ]
-};
-
-const followUsFallback = {
-    eyebrow: 'Follow Us',
-    heading: 'Follow our journey',
-    description: 'Behind the scenes, new stories, and handcrafted moments from Sri Lanka.',
-    backgroundImage: heroFallbackImage,
-    links: [
-        { label: 'Instagram', href: 'https://instagram.com' },
-        { label: 'TikTok', href: 'https://tiktok.com' },
-        { label: 'Pinterest', href: 'https://pinterest.com' }
     ]
 };
 
@@ -299,14 +265,6 @@ const valuesContent = computed(() => ({
         : valuesFallback.items
 }));
 
-const followUsContent = computed(() => ({
-    ...followUsFallback,
-    ...(cmsHomepageContent.value?.followUs ?? {}),
-    links: Array.isArray(cmsHomepageContent.value?.followUs?.links) && cmsHomepageContent.value.followUs.links.length
-        ? cmsHomepageContent.value.followUs.links
-        : followUsFallback.links
-}));
-
 const reviewsContent = computed(() => ({
     ...reviewsFallback,
     ...(cmsHomepageContent.value?.reviews ?? {}),
@@ -320,10 +278,6 @@ const reviewsItems = computed(() => reviewsContent.value.items);
 
 const valuesBgStyle = computed(() => ({
     backgroundImage: `url(${valuesContent.value.backgroundImage})`
-}));
-
-const followUsBgStyle = computed(() => ({
-    backgroundImage: `url(${followUsContent.value.backgroundImage})`
 }));
 
 const homepageRoot = ref(null);
@@ -419,8 +373,13 @@ const setupHomepageAnimations = () => {
 
 onMounted(async () => {
     const sanityHomepage = await fetchHomepageContentFromSanity();
+    const sanitySocial = await fetchSocialContentFromSanity();
+
     if (sanityHomepage) {
         cmsHomepageContent.value = sanityHomepage;
+    }
+    if (sanitySocial) {
+        cmsSocialContent.value = sanitySocial;
     }
 
     await nextTick();

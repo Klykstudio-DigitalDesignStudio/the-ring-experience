@@ -1,0 +1,43 @@
+{
+  "hero": {
+    "eyebrow": "About Us",
+    "title": "A small team, real hands, stories you can wear.",
+    "description": "This is not a showroom. It is a guided craft session where your ring becomes part of your travel memory.",
+    "backgroundImage": "/uploads/whatsapp-image-2026-02-24-at-10.43.29-1-.jpeg"
+  },
+  "approach": {
+    "eyebrow": "Our approach",
+    "title": "Less performance, more substance",
+    "paragraphOne": "The Ring Experience was built for people who want to remember a moment, not just purchase an object.",
+    "paragraphTwo": "Our role is simple: to turn shared time into a meaningful piece made by your own hands."
+  },
+  "packagesSection": {
+    "eyebrow": "Packages",
+    "heading": "Choose the pace of your experience",
+    "description": "Same artisanal core, different formats based on time and level of personalization.",
+    "ctaLabel": "Book this package"
+  },
+  "packages": [
+    {
+      "tag": "Starter",
+      "name": "Essential",
+      "duration": "90 minutes",
+      "description": "Guided session with material introduction, core techniques, and final ring finishing.",
+      "price": ""
+    },
+    {
+      "tag": "For couples",
+      "name": "Couple Ritual",
+      "duration": "2 hours",
+      "description": "A complete couple format with shared design choices, engraving options, and dedicated assistance.",
+      "price": ""
+    },
+    {
+      "tag": "Tailored",
+      "name": "Signature",
+      "duration": "2.5 hours",
+      "description": "Extended one-to-one direction with premium materials and deeper customization.",
+      "price": ""
+    }
+  ]
+}
