@@ -2,7 +2,9 @@
   "hero": {
     "headline": "Every ring begins with a choice",
     "subheadline": "A meaningful travel memory beyond the usual",
+    "mediaType": "image",
     "image": "/uploads/whatsapp-image-2026-02-24-at-10.43.29-1-.jpeg",
+    "video": "",
     "buttonLabel": "Book your experience",
     "buttonLink": "/bookexperience"
   },

@@ -12,7 +12,21 @@ export default {
                 { name: 'subheadline', title: 'Subheadline', type: 'text', rows: 3 },
                 { name: 'buttonLabel', title: 'Button Label', type: 'string' },
                 { name: 'buttonLink', title: 'Button Link', type: 'string', initialValue: '/bookexperience' },
-                { name: 'image', title: 'Image', type: 'image', options: { hotspot: true, accept: 'image/webp' } }
+                {
+                    name: 'mediaType',
+                    title: 'Hero Media Type',
+                    type: 'string',
+                    initialValue: 'image',
+                    options: {
+                        list: [
+                            { title: 'Image', value: 'image' },
+                            { title: 'Video (WEBM)', value: 'video' }
+                        ],
+                        layout: 'radio'
+                    }
+                },
+                { name: 'image', title: 'Image (WEBP)', type: 'image', options: { hotspot: true, accept: 'image/webp' } },
+                { name: 'video', title: 'Video (WEBM)', type: 'file', options: { accept: '.webm' } }
             ]
         },
         {

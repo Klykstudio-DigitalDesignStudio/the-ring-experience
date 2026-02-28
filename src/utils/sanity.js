@@ -7,6 +7,16 @@ export const sanity = createClient({
     useCdn: true
 });
 
+export function toWebImage(url, options = {}) {
+    if (!url || typeof url !== 'string') return '';
+
+    const width = Number.isFinite(options.width) ? options.width : 1600;
+    const quality = Number.isFinite(options.quality) ? options.quality : 80;
+    const separator = url.includes('?') ? '&' : '?';
+
+    return `${url}${separator}auto=format&fit=max&w=${width}&q=${quality}`;
+}
+
 const HOMEPAGE_QUERY = `
 *[_type == "homepage"][0]{
   hero{
@@ -14,7 +24,9 @@ const HOMEPAGE_QUERY = `
     subheadline,
     buttonLabel,
     buttonLink,
-    "image": image.asset->url
+    mediaType,
+    "image": image.asset->url,
+    "video": video.asset->url
   },
   aMoment{
     eyebrow,
@@ -101,6 +113,97 @@ const ABOUT_US_QUERY = `
 }
 `;
 
+const GEMSTONES_PAGE_QUERY = `
+*[_type == "gemstonesPage"][0]{
+  hero{
+    eyebrow,
+    title,
+    description,
+    "backgroundImage": backgroundImage.asset->url
+  },
+  intro{
+    eyebrow,
+    heading,
+    description
+  },
+  gemstones[]{
+    key,
+    name,
+    isVisible,
+    origin,
+    tone,
+    cut,
+    description,
+    "image": image.asset->url
+  }
+}
+`;
+
+const CLIENT_GALLERY_QUERY = `
+*[_type == "clientGallery"][0]{
+  hero{
+    eyebrow,
+    title,
+    description,
+    "backgroundImage": backgroundImage.asset->url
+  },
+  intro{
+    eyebrow,
+    heading,
+    description
+  },
+  photos[]{
+    "image": image.asset->url,
+    isVisible,
+    displaySize,
+    caption,
+    story,
+    dateLabel
+  }
+}
+`;
+
+const PAGE_CTA_QUERY = `
+*[_type == "pageCta"][0]{
+  home{
+    enabled,
+    eyebrow,
+    heading,
+    description,
+    buttonLabel,
+    buttonLink,
+    "backgroundImage": backgroundImage.asset->url
+  },
+  about{
+    enabled,
+    eyebrow,
+    heading,
+    description,
+    buttonLabel,
+    buttonLink,
+    "backgroundImage": backgroundImage.asset->url
+  },
+  gemstones{
+    enabled,
+    eyebrow,
+    heading,
+    description,
+    buttonLabel,
+    buttonLink,
+    "backgroundImage": backgroundImage.asset->url
+  },
+  gallery{
+    enabled,
+    eyebrow,
+    heading,
+    description,
+    buttonLabel,
+    buttonLink,
+    "backgroundImage": backgroundImage.asset->url
+  }
+}
+`;
+
 const FOOTER_QUERY = `
 *[_type == "footer"][0]{
   subtitle,
@@ -153,6 +256,36 @@ export async function fetchAboutUsContentFromSanity() {
 
     try {
         return await sanity.fetch(ABOUT_US_QUERY);
+    } catch {
+        return null;
+    }
+}
+
+export async function fetchGemstonesPageContentFromSanity() {
+    if (!import.meta.env.VITE_SANITY_PROJECT_ID || !import.meta.env.VITE_SANITY_DATASET) return null;
+
+    try {
+        return await sanity.fetch(GEMSTONES_PAGE_QUERY);
+    } catch {
+        return null;
+    }
+}
+
+export async function fetchClientGalleryContentFromSanity() {
+    if (!import.meta.env.VITE_SANITY_PROJECT_ID || !import.meta.env.VITE_SANITY_DATASET) return null;
+
+    try {
+        return await sanity.fetch(CLIENT_GALLERY_QUERY);
+    } catch {
+        return null;
+    }
+}
+
+export async function fetchPageCtaContentFromSanity() {
+    if (!import.meta.env.VITE_SANITY_PROJECT_ID || !import.meta.env.VITE_SANITY_DATASET) return null;
+
+    try {
+        return await sanity.fetch(PAGE_CTA_QUERY);
     } catch {
         return null;
     }

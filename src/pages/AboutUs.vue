@@ -1,29 +1,8 @@
 <template>
     <main id="aboutUs" class="w-full">
-        <section class="relative overflow-hidden bg-black pb-20 pt-28 sm:pb-24 sm:pt-32 lg:pb-28">
-            <div class="pointer-events-none absolute inset-0">
-                <div class="absolute inset-0 bg-cover bg-center" :style="heroBackgroundStyle"></div>
-                <div class="absolute inset-0 bg-(--color-darkerbrown)" style="opacity: 0.6;"></div>
-                <div class="absolute inset-0"
-                    style="background: linear-gradient(to bottom, color-mix(in srgb, var(--color-darkbrown) 35%, transparent), color-mix(in srgb, var(--color-darkbrown) 80%, transparent));">
-                </div>
-            </div>
+        <SecondaryHero :content="heroContent" />
 
-            <div class="relative mx-auto w-11/12 sm:w-10/12">
-                <div class="max-w-4xl text-(--color-lightbeige)">
-                    <p class="text-xs tracking-[0.2em] uppercase" style="opacity: 0.74;">{{ heroContent.eyebrow }}</p>
-                    <h1 class="mt-5 max-w-3xl font-display text-4xl leading-tight sm:text-5xl md:text-6xl">
-                        {{ heroContent.title }}
-                    </h1>
-                    <p class="mt-6 max-w-2xl text-base leading-relaxed sm:text-lg" style="opacity: 0.86;">
-                        {{ heroContent.description }}
-                    </p>
-                    <div class="mt-8 h-px w-24 bg-(--color-noisette)"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="w-full py-16 sm:py-20 lg:py-24">
+        <section class="w-full py-20 sm:py-24 lg:py-32">
             <div class="mx-auto w-11/12 sm:w-10/12">
                 <div class="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-14">
                     <div class="lg:col-span-4">
@@ -44,7 +23,7 @@
             </div>
         </section>
 
-        <section id="packages" class="w-full bg-black py-16 text-(--color-lightbeige) sm:py-20 lg:py-24">
+        <section id="packages" class="w-full bg-black py-20 text-(--color-lightbeige) sm:py-24 lg:py-32">
             <div class="mx-auto w-11/12 sm:w-10/12">
                 <div class="mx-auto max-w-3xl text-center">
                     <p class="text-xs tracking-[0.2em] uppercase" style="opacity: 0.74;">{{ packagesSectionContent.eyebrow }}</p>
@@ -66,26 +45,32 @@
                         <p class="mt-2 text-sm tracking-[0.08em] uppercase" style="opacity: 0.76;">{{ pkg.duration }}</p>
                         <p class="mt-5 text-base leading-relaxed" style="opacity: 0.86;">{{ pkg.description }}</p>
                         <p v-if="pkg.price" class="mt-6 text-xl font-medium text-(--color-noisette)">{{ pkg.price }}</p>
-                        <router-link to="/bookexperience"
-                            class="mt-7 inline-block border border-(--color-noisette) px-5 py-2 text-sm tracking-[0.12em] uppercase transition-colors duration-300 hover:bg-(--color-noisette) hover:text-(--color-darkbrown)">
-                            {{ packagesSectionContent.ctaLabel }}
+                        <router-link to="/bookexperience" class="mt-7 inline-block">
+                            <Button variant="outline" size="sm">
+                                {{ packagesSectionContent.ctaLabel }}
+                            </Button>
                         </router-link>
                     </article>
                 </div>
             </div>
         </section>
 
+        <PageCtaSection :content="aboutCtaContent" />
         <SocialSection :content="cmsSocialContent" />
     </main>
 </template>
 
 <script setup>
 import { computed, onMounted, ref } from 'vue';
+import Button from '../components/Button.vue';
 import heroFallbackImage from '../assets/herocover.jpeg';
+import PageCtaSection from '../components/PageCtaSection.vue';
 import SocialSection from '../components/SocialSection.vue';
+import SecondaryHero from '../components/SecondaryHero.vue';
 import localAboutContent from '../../content/about.json';
+import localCtaContent from '../../content/cta.json';
 import localSocialContent from '../../content/social.json';
-import { fetchAboutUsContentFromSanity, fetchSocialContentFromSanity } from '../utils/sanity';
+import { fetchAboutUsContentFromSanity, fetchPageCtaContentFromSanity, fetchSocialContentFromSanity } from '../utils/sanity';
 
 const heroFallback = {
     eyebrow: 'About Us',
@@ -133,6 +118,7 @@ const packagesFallback = [
 ];
 
 const cmsAboutContent = ref(localAboutContent);
+const cmsCtaContent = ref(localCtaContent);
 const cmsSocialContent = ref(localSocialContent);
 
 const heroContent = computed(() => ({
@@ -156,16 +142,20 @@ const packagesContent = computed(() => (
         : packagesFallback
 ));
 
-const heroBackgroundStyle = computed(() => ({
-    backgroundImage: `url(${heroContent.value.backgroundImage})`
+const aboutCtaContent = computed(() => ({
+    ...(cmsCtaContent.value?.about ?? {})
 }));
 
 onMounted(async () => {
     const sanityAbout = await fetchAboutUsContentFromSanity();
+    const sanityCta = await fetchPageCtaContentFromSanity();
     const sanitySocial = await fetchSocialContentFromSanity();
 
     if (sanityAbout) {
         cmsAboutContent.value = sanityAbout;
+    }
+    if (sanityCta) {
+        cmsCtaContent.value = sanityCta;
     }
 
     if (sanitySocial) {

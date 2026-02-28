@@ -106,8 +106,9 @@ const hasScrolled = ref(false)
 const logoSrc = ref('/the-ring-experience-logo.svg')
 
 const primaryLinks = [
-  { label: 'Home', to: '/' },
   { label: 'About Us', to: '/aboutus' },
+  { label: 'Gemstones', to: '/gemstones' },
+  { label: 'Gallery', to: '/gallery' },
 ]
 
 const isSolid = computed(() => route.path !== '/' || hasScrolled.value || isMobileOpen.value)

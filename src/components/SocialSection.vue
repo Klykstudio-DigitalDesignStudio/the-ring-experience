@@ -30,6 +30,7 @@
 <script setup>
 import { computed } from 'vue';
 import heroFallbackImage from '../assets/herocover.jpeg';
+import { toWebImage } from '../utils/sanity';
 
 const props = defineProps({
     content: {
@@ -59,6 +60,6 @@ const mergedContent = computed(() => ({
 }));
 
 const backgroundStyle = computed(() => ({
-    backgroundImage: `url(${mergedContent.value.backgroundImage})`
+    backgroundImage: `url(${toWebImage(mergedContent.value.backgroundImage, { width: 2200, quality: 80 })})`
 }));
 </script>
