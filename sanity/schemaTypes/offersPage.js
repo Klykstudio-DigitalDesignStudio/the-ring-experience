@@ -1,3 +1,5 @@
+import { routeField } from './shared/routeOptions';
+
 export default {
     name: 'offersPage',
     title: 'Our Offers Page',
@@ -62,7 +64,7 @@ export default {
                 { name: 'heading', title: 'Heading', type: 'string' },
                 { name: 'description', title: 'Description', type: 'text', rows: 3 },
                 { name: 'buttonLabel', title: 'Button Label', type: 'string', initialValue: 'Explore gemstones' },
-                { name: 'buttonLink', title: 'Button Link', type: 'string', initialValue: '/gemstones' }
+                routeField({ name: 'buttonLink', title: 'Button Link', initialValue: '/gemstones' })
             ]
         }
     ],

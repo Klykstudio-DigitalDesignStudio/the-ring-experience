@@ -100,7 +100,8 @@ const setupGalleryAnimations = () => {
                 gsap.fromTo(column, { y: -speedOffsets[index] }, {
                     y: speedOffsets[index],
                     ease: 'none',
-                    scrollTrigger: { trigger: galleryRoot.value, start: 'top bottom', end: 'bottom top', scrub: true }
+                    force3D: true,
+                    scrollTrigger: { trigger: galleryRoot.value, start: 'top bottom', end: 'bottom top', scrub: 0.8 }
                 });
             });
         });

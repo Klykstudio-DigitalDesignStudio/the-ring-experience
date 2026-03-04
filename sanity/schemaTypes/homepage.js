@@ -1,3 +1,5 @@
+import { routeField } from './shared/routeOptions';
+
 export default {
     name: 'homepage',
     title: 'Homepage',
@@ -11,9 +13,9 @@ export default {
                 { name: 'headline', title: 'Headline', type: 'string' },
                 { name: 'subheadline', title: 'Subheadline', type: 'text', rows: 3 },
                 { name: 'buttonLabel', title: 'Button Label', type: 'string' },
-                { name: 'buttonLink', title: 'Button Link', type: 'string', initialValue: '/bookexperience' },
+                routeField({ name: 'buttonLink', title: 'Button Link', initialValue: '/bookexperience' }),
                 { name: 'secondaryButtonLabel', title: 'Secondary Button Label', type: 'string', initialValue: 'Discover our offers' },
-                { name: 'secondaryButtonLink', title: 'Secondary Button Link', type: 'string', initialValue: '/ouroffers' },
+                routeField({ name: 'secondaryButtonLink', title: 'Secondary Button Link', initialValue: '/ouroffers' }),
                 {
                     name: 'mediaType',
                     title: 'Hero Media Type',
@@ -106,7 +108,7 @@ export default {
                 { name: 'heading', title: 'Heading', type: 'string' },
                 { name: 'description', title: 'Description', type: 'text', rows: 3 },
                 { name: 'ctaLabel', title: 'CTA Label', type: 'string', initialValue: 'Discover all offers' },
-                { name: 'ctaLink', title: 'CTA Link', type: 'string', initialValue: '/ouroffers' }
+                routeField({ name: 'ctaLink', title: 'CTA Link', initialValue: '/ouroffers' })
             ]
         },
         {

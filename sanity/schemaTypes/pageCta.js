@@ -1,3 +1,5 @@
+import { routeField } from './shared/routeOptions';
+
 export default {
     name: 'pageCta',
     title: 'Page CTA',
@@ -14,7 +16,7 @@ export default {
                 { name: 'heading', title: 'Heading', type: 'string' },
                 { name: 'description', title: 'Description', type: 'text', rows: 3 },
                 { name: 'buttonLabel', title: 'Button Label', type: 'string' },
-                { name: 'buttonLink', title: 'Button Link', type: 'string', initialValue: '/bookexperience' },
+                routeField({ name: 'buttonLink', title: 'Button Link', initialValue: '/bookexperience' }),
                 { name: 'backgroundImage', title: 'Background Image', type: 'image', options: { hotspot: true, accept: 'image/webp' } }
             ]
         },
@@ -29,7 +31,7 @@ export default {
                 { name: 'heading', title: 'Heading', type: 'string' },
                 { name: 'description', title: 'Description', type: 'text', rows: 3 },
                 { name: 'buttonLabel', title: 'Button Label', type: 'string' },
-                { name: 'buttonLink', title: 'Button Link', type: 'string', initialValue: '/bookexperience' },
+                routeField({ name: 'buttonLink', title: 'Button Link', initialValue: '/bookexperience' }),
                 { name: 'backgroundImage', title: 'Background Image', type: 'image', options: { hotspot: true, accept: 'image/webp' } }
             ]
         },
@@ -44,7 +46,7 @@ export default {
                 { name: 'heading', title: 'Heading', type: 'string' },
                 { name: 'description', title: 'Description', type: 'text', rows: 3 },
                 { name: 'buttonLabel', title: 'Button Label', type: 'string' },
-                { name: 'buttonLink', title: 'Button Link', type: 'string', initialValue: '/bookexperience' },
+                routeField({ name: 'buttonLink', title: 'Button Link', initialValue: '/bookexperience' }),
                 { name: 'backgroundImage', title: 'Background Image', type: 'image', options: { hotspot: true, accept: 'image/webp' } }
             ]
         },
@@ -59,7 +61,7 @@ export default {
                 { name: 'heading', title: 'Heading', type: 'string' },
                 { name: 'description', title: 'Description', type: 'text', rows: 3 },
                 { name: 'buttonLabel', title: 'Button Label', type: 'string' },
-                { name: 'buttonLink', title: 'Button Link', type: 'string', initialValue: '/bookexperience' },
+                routeField({ name: 'buttonLink', title: 'Button Link', initialValue: '/bookexperience' }),
                 { name: 'backgroundImage', title: 'Background Image', type: 'image', options: { hotspot: true, accept: 'image/webp' } }
             ]
         },
@@ -74,7 +76,7 @@ export default {
                 { name: 'heading', title: 'Heading', type: 'string' },
                 { name: 'description', title: 'Description', type: 'text', rows: 3 },
                 { name: 'buttonLabel', title: 'Button Label', type: 'string' },
-                { name: 'buttonLink', title: 'Button Link', type: 'string', initialValue: '/bookexperience' },
+                routeField({ name: 'buttonLink', title: 'Button Link', initialValue: '/bookexperience' }),
                 { name: 'backgroundImage', title: 'Background Image', type: 'image', options: { hotspot: true, accept: 'image/webp' } }
             ]
         },
@@ -89,7 +91,7 @@ export default {
                 { name: 'heading', title: 'Heading', type: 'string' },
                 { name: 'description', title: 'Description', type: 'text', rows: 3 },
                 { name: 'buttonLabel', title: 'Button Label', type: 'string' },
-                { name: 'buttonLink', title: 'Button Link', type: 'string', initialValue: '/ouroffers' },
+                routeField({ name: 'buttonLink', title: 'Button Link', initialValue: '/ouroffers' }),
                 { name: 'backgroundImage', title: 'Background Image', type: 'image', options: { hotspot: true, accept: 'image/webp' } }
             ]
         }

@@ -12,6 +12,7 @@ export function useRevealAnimations(rootRef, options = {}) {
     const y = Number.isFinite(options.y) ? options.y : 34;
     const duration = Number.isFinite(options.duration) ? options.duration : 0.8;
     const stagger = Number.isFinite(options.stagger) ? options.stagger : 0.08;
+    const once = options.once !== false;
 
     let animationContext = null;
     let mediaMatcher = null;
@@ -39,10 +40,13 @@ export function useRevealAnimations(rootRef, options = {}) {
                             duration,
                             ease: 'power2.out',
                             stagger,
+                            overwrite: 'auto',
+                            immediateRender: false,
                             scrollTrigger: {
                                 trigger: element,
                                 start,
-                                toggleActions: 'play none none reverse'
+                                toggleActions: once ? 'play none none none' : 'play none none reverse',
+                                once
                             }
                         });
                     });

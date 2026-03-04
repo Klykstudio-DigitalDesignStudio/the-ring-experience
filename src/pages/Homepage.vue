@@ -333,13 +333,17 @@ const setupHomepageAnimations = () => {
                     y: 44,
                     duration: 0.85,
                     ease: 'power2.out',
-                    scrollTrigger: { trigger: section, start: 'top 84%', toggleActions: 'play reverse play reverse' }
+                    overwrite: 'auto',
+                    immediateRender: false,
+                    scrollTrigger: { trigger: section, start: 'top 84%', toggleActions: 'play none none none', once: true }
                 });
             });
             if (experienceGrid.value) {
                 gsap.from(experienceGrid.value.querySelectorAll('.experience-card'), {
                     autoAlpha: 0, y: 26, duration: 0.65, ease: 'power2.out', stagger: 0.12,
-                    scrollTrigger: { trigger: experienceGrid.value, start: 'top 78%', toggleActions: 'play reverse play reverse' }
+                    overwrite: 'auto',
+                    immediateRender: false,
+                    scrollTrigger: { trigger: experienceGrid.value, start: 'top 78%', toggleActions: 'play none none none', once: true }
                 });
             }
         });
