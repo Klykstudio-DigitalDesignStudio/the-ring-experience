@@ -1,10 +1,15 @@
 import { createClient } from '@sanity/client';
 
+const SANITY_PROJECT_ID = import.meta.env.VITE_SANITY_PROJECT_ID;
+const SANITY_DATASET = import.meta.env.VITE_SANITY_DATASET;
+const SANITY_API_VERSION = import.meta.env.VITE_SANITY_API_VERSION || '2024-01-01';
+const SANITY_USE_CDN = String(import.meta.env.VITE_SANITY_USE_CDN || 'false').toLowerCase() === 'true';
+
 export const sanity = createClient({
-    projectId: import.meta.env.VITE_SANITY_PROJECT_ID,
-    dataset: import.meta.env.VITE_SANITY_DATASET,
-    apiVersion: '2024-01-01',
-    useCdn: true
+    projectId: SANITY_PROJECT_ID,
+    dataset: SANITY_DATASET,
+    apiVersion: SANITY_API_VERSION,
+    useCdn: SANITY_USE_CDN
 });
 
 export function toWebImage(url, options = {}) {
@@ -346,11 +351,16 @@ const SITE_APPEARANCE_QUERY = `
 const GOOGLE_PLACES_API_KEY = import.meta.env.VITE_GOOGLE_PLACES_API_KEY;
 
 async function fetchFromSanity(query) {
-    if (!import.meta.env.VITE_SANITY_PROJECT_ID || !import.meta.env.VITE_SANITY_DATASET) return null;
+    if (!SANITY_PROJECT_ID || !SANITY_DATASET) {
+        console.warn('[sanity] Missing VITE_SANITY_PROJECT_ID or VITE_SANITY_DATASET. Using local fallback content.');
+        return null;
+    }
 
     try {
         return await sanity.fetch(query);
-    } catch {
+    } catch (error) {
+        const message = error?.message || String(error);
+        console.warn(`[sanity] Fetch failed (${SANITY_PROJECT_ID}/${SANITY_DATASET}): ${message}`);
         return null;
     }
 }
