@@ -12,6 +12,7 @@
             </div>
         </section>
 
+        
         <section data-reveal class="w-full py-16 sm:py-20 lg:py-24">
             <div class="mx-auto grid w-11/12 grid-cols-1 items-center gap-8 sm:w-10/12 lg:grid-cols-12 lg:gap-14">
                 <figure class="lg:col-span-7">
