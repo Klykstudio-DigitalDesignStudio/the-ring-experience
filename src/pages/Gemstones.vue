@@ -1,14 +1,10 @@
 <template>
-    <main id="gemstones" class="w-full">
-        <SecondaryHero :content="heroContent" />
-
-        <section class="w-full py-20 sm:py-24 lg:py-32">
+    <main id="gemstones" ref="gemstonesRoot" class="w-full">
+        <section data-reveal class="w-full pt-28 pb-20 sm:pt-32 sm:pb-24 lg:pt-36 lg:pb-32">
             <div class="mx-auto w-11/12 sm:w-10/12">
                 <div class="mx-auto max-w-3xl text-center">
                     <p class="text-xs tracking-[0.2em] text-(--color-mutedbrown) uppercase">{{ introContent.eyebrow }}</p>
-                    <h2 class="mt-3 font-display text-4xl leading-tight text-(--color-brown) sm:text-5xl">
-                        {{ introContent.heading }}
-                    </h2>
+                    <h2 class="mt-3 font-display text-5xl leading-tight text-(--color-brown) sm:text-6xl">{{ introContent.heading }}</h2>
                     <p class="mx-auto mt-4 max-w-2xl text-base text-(--color-brown) sm:text-lg" style="opacity: 0.85;">
                         {{ introContent.description }}
                     </p>
@@ -38,33 +34,19 @@
             </div>
         </section>
 
-        <PageCtaSection :content="gemstonesCtaContent" />
+        <GemstonesOffersCallout :content="offersCalloutContent" />
         <SocialSection :content="cmsSocialContent" />
     </main>
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue';
-import heroFallbackImage from '../assets/herocover.jpeg';
-import PageCtaSection from '../components/PageCtaSection.vue';
-import SecondaryHero from '../components/SecondaryHero.vue';
+import { computed, nextTick, onMounted, ref } from 'vue';
+import GemstonesOffersCallout from '../components/GemstonesOffersCallout.vue';
 import SocialSection from '../components/SocialSection.vue';
-import localCtaContent from '../../content/cta.json';
+import { useRevealAnimations } from '../composables/useRevealAnimations';
 import localGemstonesContent from '../../content/gemstones.json';
 import localSocialContent from '../../content/social.json';
-import {
-    fetchGemstonesPageContentFromSanity,
-    fetchPageCtaContentFromSanity,
-    fetchSocialContentFromSanity,
-    toWebImage
-} from '../utils/sanity';
-
-const heroFallback = {
-    eyebrow: 'Gemstones',
-    title: 'The latest stones selected for this season',
-    description: 'A curated list of natural gemstones currently available for your ring experience in Sri Lanka.',
-    backgroundImage: heroFallbackImage
-};
+import { fetchGemstonesPageContentFromSanity, fetchSocialContentFromSanity, toWebImage } from '../utils/sanity';
 
 const introFallback = {
     eyebrow: 'New arrivals',
@@ -72,78 +54,32 @@ const introFallback = {
     description: 'Each gemstone is selected for color, texture, and character. Inventory rotates often.'
 };
 
-const gemstonesFallback = [
-    {
-        key: 'moonstone',
-        name: 'Rainbow Moonstone',
-        isVisible: true,
-        origin: 'Sri Lanka',
-        tone: 'Milky white with blue flash',
-        cut: 'Oval cabochon',
-        description: 'Soft iridescence and a calm glow, ideal for minimal or vintage-inspired rings.',
-        image: heroFallbackImage
-    },
-    {
-        key: 'sapphire',
-        name: 'Ceylon Sapphire',
-        isVisible: true,
-        origin: 'Sri Lanka',
-        tone: 'Royal blue',
-        cut: 'Round faceted',
-        description: 'Classic and brilliant, with crisp reflections and a timeless premium look.',
-        image: heroFallbackImage
-    },
-    {
-        key: 'garnet',
-        name: 'Rhodolite Garnet',
-        isVisible: true,
-        origin: 'Madagascar',
-        tone: 'Berry red',
-        cut: 'Pear faceted',
-        description: 'Warm, deep color that works beautifully on polished sterling silver settings.',
-        image: heroFallbackImage
-    }
-];
-
 const cmsGemstonesContent = ref(localGemstonesContent);
-const cmsCtaContent = ref(localCtaContent);
 const cmsSocialContent = ref(localSocialContent);
+const gemstonesRoot = ref(null);
+const { setupRevealAnimations } = useRevealAnimations(gemstonesRoot, { selectors: ['[data-reveal]', '.gem-card'], start: 'top 88%' });
 
-const heroContent = computed(() => ({
-    ...heroFallback,
-    ...(cmsGemstonesContent.value?.hero ?? {})
-}));
-
-const introContent = computed(() => ({
-    ...introFallback,
-    ...(cmsGemstonesContent.value?.intro ?? {})
-}));
-
+const introContent = computed(() => ({ ...introFallback, ...(cmsGemstonesContent.value?.intro ?? {}) }));
 const gemstones = computed(() => (
-    (Array.isArray(cmsGemstonesContent.value?.gemstones) && cmsGemstonesContent.value.gemstones.length
-        ? cmsGemstonesContent.value.gemstones
-        : gemstonesFallback).filter((stone) => stone?.isVisible !== false)
+    (Array.isArray(cmsGemstonesContent.value?.gemstones) ? cmsGemstonesContent.value.gemstones : []).filter((stone) => stone?.isVisible !== false)
 ));
-
-const gemstonesCtaContent = computed(() => ({
-    ...(cmsCtaContent.value?.gemstones ?? {})
+const offersCalloutContent = computed(() => ({
+    eyebrow: 'Our offers',
+    heading: 'Pair your favorite stone with the right package',
+    description: 'Compare all available experience formats before booking.',
+    buttonLabel: 'Discover our offers',
+    buttonLink: '/ouroffers'
 }));
 
 onMounted(async () => {
-    const sanityGemstones = await fetchGemstonesPageContentFromSanity();
-    const sanityCta = await fetchPageCtaContentFromSanity();
-    const sanitySocial = await fetchSocialContentFromSanity();
-
-    if (sanityGemstones) {
-        cmsGemstonesContent.value = sanityGemstones;
-    }
-    if (sanityCta) {
-        cmsCtaContent.value = sanityCta;
-    }
-
-    if (sanitySocial) {
-        cmsSocialContent.value = sanitySocial;
-    }
+    const [sanityGemstones, sanitySocial] = await Promise.all([
+        fetchGemstonesPageContentFromSanity(),
+        fetchSocialContentFromSanity()
+    ]);
+    if (sanityGemstones) cmsGemstonesContent.value = sanityGemstones;
+    if (sanitySocial) cmsSocialContent.value = sanitySocial;
+    await nextTick();
+    setupRevealAnimations();
 });
 </script>
 

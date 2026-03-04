@@ -1,8 +1,9 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { schemaTypes } from '../sanity/schemaTypes';
+import { deskStructure } from './deskStructure';
 
-const singletonTypes = new Set(['homepage', 'footer', 'navbar', 'aboutUs', 'social', 'gemstonesPage', 'clientGallery', 'pageCta']);
+const singletonTypes = new Set(['homepage', 'footer', 'navbar', 'aboutUs', 'social', 'gemstonesPage', 'clientGallery', 'pageCta', 'offersPage', 'bookingPage', 'contactForm', 'siteAppearance']);
 
 export default defineConfig({
     name: 'default',
@@ -11,7 +12,7 @@ export default defineConfig({
     dataset: 'production',
     apiVersion: '2024-01-01',
     basePath: '/admin',
-    plugins: [structureTool()],
+    plugins: [structureTool({ structure: deskStructure })],
     document: {
         actions: (prev, context) => (
             singletonTypes.has(context.schemaType)

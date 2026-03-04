@@ -6,7 +6,9 @@
     "image": "/uploads/whatsapp-image-2026-02-24-at-10.43.29-1-.jpeg",
     "video": "",
     "buttonLabel": "Book your experience",
-    "buttonLink": "/bookexperience"
+    "buttonLink": "/bookexperience",
+    "secondaryButtonLabel": "Discover our offers",
+    "secondaryButtonLink": "/ouroffers"
   },
   "aMoment": {
     "eyebrow": "A shared ritual",
@@ -38,6 +40,14 @@
       "image": "/uploads/the-experience.png"
     }
   ],
+  "packagesPreview": {
+    "enabled": true,
+    "eyebrow": "Our offers",
+    "heading": "Choose your package before booking",
+    "description": "A clear preview of each package. Full details are available on the offers page.",
+    "ctaLabel": "Discover all offers",
+    "ctaLink": "/ouroffers"
+  },
   "values": {
     "heading": "Our Values",
     "backgroundImage": "/uploads/pexels-keeganjchecks-30321755.jpg",
@@ -61,11 +71,15 @@
     ]
   },
   "reviews": {
+    "enabled": true,
     "eyebrow": "Guest Reviews",
     "heading": "What people say about the experience",
     "description": "In a world full of hyper-activity, you can decide to slow down",
     "sourceLabel": "Google Business",
     "sourceUrl": "",
+    "sourceType": "manual",
+    "googlePlaceId": "",
+    "maxItems": 9,
     "items": [
       {
         "author": "Elena M.",

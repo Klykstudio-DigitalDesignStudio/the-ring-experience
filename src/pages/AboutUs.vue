@@ -1,165 +1,121 @@
 <template>
-    <main id="aboutUs" class="w-full">
-        <SecondaryHero :content="heroContent" />
+    <main id="aboutUs" ref="aboutRoot" class="w-full">
+        <PageTitleSection :content="heroContent" />
 
-        <section class="w-full py-20 sm:py-24 lg:py-32">
+        <section data-reveal class="w-full pb-16 sm:pb-20">
             <div class="mx-auto w-11/12 sm:w-10/12">
-                <div class="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-14">
-                    <div class="lg:col-span-4">
-                        <p class="text-xs tracking-[0.2em] text-(--color-mutedbrown) uppercase">{{ approachContent.eyebrow }}</p>
-                        <h2 class="mt-3 font-display text-4xl leading-tight text-(--color-brown) sm:text-5xl">
-                            {{ approachContent.title }}
-                        </h2>
-                    </div>
-                    <div class="space-y-5 text-(--color-brown) lg:col-span-8">
-                        <p class="max-w-3xl text-base leading-relaxed sm:text-lg" style="opacity: 0.9;">
-                            {{ approachContent.paragraphOne }}
-                        </p>
-                        <p class="max-w-3xl text-base leading-relaxed font-semibold italic sm:text-lg">
-                            "{{ approachContent.paragraphTwo }}"
-                        </p>
-                    </div>
-                </div>
+                <figure class="overflow-hidden border bg-white/75 p-2 sm:p-3"
+                    style="border-color: color-mix(in srgb, var(--color-darkbrown) 18%, transparent);">
+                    <img :src="heroContent.backgroundImage" alt="The Ring Experience story"
+                        class="h-[28rem] w-full object-cover object-center sm:h-[36rem]">
+                </figure>
             </div>
         </section>
 
-        <section id="packages" class="w-full bg-black py-20 text-(--color-lightbeige) sm:py-24 lg:py-32">
-            <div class="mx-auto w-11/12 sm:w-10/12">
-                <div class="mx-auto max-w-3xl text-center">
-                    <p class="text-xs tracking-[0.2em] uppercase" style="opacity: 0.74;">{{ packagesSectionContent.eyebrow }}</p>
-                    <h2 class="mt-3 font-display text-4xl leading-tight sm:text-5xl">
-                        {{ packagesSectionContent.heading }}
-                    </h2>
-                    <p class="mx-auto mt-4 max-w-2xl text-base sm:text-lg" style="opacity: 0.85;">
-                        {{ packagesSectionContent.description }}
+        <section data-reveal class="w-full py-16 sm:py-20 lg:py-24">
+            <div class="mx-auto grid w-11/12 grid-cols-1 items-center gap-8 sm:w-10/12 lg:grid-cols-12 lg:gap-14">
+                <figure class="lg:col-span-7">
+                    <img :src="approachContent.image || heroContent.backgroundImage" alt="Our vision"
+                        class="h-[24rem] w-full rounded-xs object-cover object-center sm:h-[30rem]">
+                </figure>
+                <div class="lg:col-span-5">
+                    <p class="text-xs tracking-[0.2em] text-(--color-mutedbrown) uppercase">{{ approachContent.eyebrow }}</p>
+                    <h2 class="mt-3 font-display text-4xl leading-tight text-(--color-brown) sm:text-5xl">{{ approachContent.title }}</h2>
+                    <div class="mt-6 h-px w-20 bg-(--color-noisette)"></div>
+                    <p class="mt-6 text-base leading-relaxed text-(--color-brown) sm:text-lg" style="opacity: 0.88;">
+                        {{ approachContent.paragraphOne }}
+                    </p>
+                    <p class="mt-4 text-base leading-relaxed text-(--color-brown) sm:text-lg" style="opacity: 0.88;">
+                        {{ approachContent.paragraphTwo }}
                     </p>
                 </div>
+            </div>
+        </section>
 
-                <div class="mx-auto mt-10 h-px w-24 bg-(--color-noisette)"></div>
-
-                <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-                    <article v-for="pkg in packagesContent" :key="pkg.name" class="border p-7 sm:p-8"
-                        style="border-color: color-mix(in srgb, var(--color-lightbeige) 28%, transparent);">
-                        <p class="text-xs tracking-[0.16em] uppercase text-(--color-noisette)">{{ pkg.tag }}</p>
-                        <h3 class="mt-3 font-display text-3xl leading-tight sm:text-4xl">{{ pkg.name }}</h3>
-                        <p class="mt-2 text-sm tracking-[0.08em] uppercase" style="opacity: 0.76;">{{ pkg.duration }}</p>
-                        <p class="mt-5 text-base leading-relaxed" style="opacity: 0.86;">{{ pkg.description }}</p>
-                        <p v-if="pkg.price" class="mt-6 text-xl font-medium text-(--color-noisette)">{{ pkg.price }}</p>
-                        <router-link to="/bookexperience" class="mt-7 inline-block">
-                            <Button variant="outline" size="sm">
-                                {{ packagesSectionContent.ctaLabel }}
-                            </Button>
-                        </router-link>
-                    </article>
+        <section data-reveal class="w-full bg-black py-16 text-(--color-lightbeige) sm:py-20 lg:py-24">
+            <div class="mx-auto grid w-11/12 grid-cols-1 items-center gap-8 sm:w-10/12 lg:grid-cols-12 lg:gap-14">
+                <div class="lg:order-2 lg:col-span-7">
+                    <img :src="originContent.image || heroContent.backgroundImage" alt="How it started"
+                        class="h-[24rem] w-full rounded-xs object-cover object-center sm:h-[30rem]">
+                </div>
+                <div class="lg:order-1 lg:col-span-5">
+                    <p class="text-xs tracking-[0.2em] uppercase" style="opacity: 0.74;">{{ originContent.eyebrow }}</p>
+                    <h2 class="mt-3 font-display text-4xl leading-tight sm:text-5xl">{{ originContent.title }}</h2>
+                    <div class="mt-6 h-px w-20 bg-(--color-noisette)"></div>
+                    <p class="mt-6 text-base leading-relaxed sm:text-lg" style="opacity: 0.88;">{{ originContent.paragraphOne }}</p>
+                    <p class="mt-4 text-base leading-relaxed sm:text-lg" style="opacity: 0.88;">{{ originContent.paragraphTwo }}</p>
                 </div>
             </div>
         </section>
 
-        <PageCtaSection :content="aboutCtaContent" />
+        <section data-reveal class="w-full py-16 sm:py-20 lg:py-24">
+            <div class="mx-auto w-11/12 sm:w-10/12">
+                <div class="mx-auto max-w-4xl text-center">
+                    <p class="text-xs tracking-[0.2em] text-(--color-mutedbrown) uppercase">Reason to exist</p>
+                    <h3 class="mt-3 font-display text-4xl leading-tight text-(--color-brown) sm:text-5xl">
+                        We exist to turn travel moments into personal symbols.
+                    </h3>
+                    <p class="mx-auto mt-5 max-w-3xl text-base text-(--color-brown) sm:text-lg" style="opacity: 0.88;">
+                        Every session is designed so people do not just buy a souvenir. They create a memory with their own hands, guided by real craftsmanship.
+                    </p>
+                </div>
+            </div>
+        </section>
+
         <SocialSection :content="cmsSocialContent" />
     </main>
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue';
-import Button from '../components/Button.vue';
-import heroFallbackImage from '../assets/herocover.jpeg';
-import PageCtaSection from '../components/PageCtaSection.vue';
+import { computed, nextTick, onMounted, ref } from 'vue';
+import PageTitleSection from '../components/PageTitleSection.vue';
 import SocialSection from '../components/SocialSection.vue';
-import SecondaryHero from '../components/SecondaryHero.vue';
+import heroFallbackImage from '../assets/herocover.jpeg';
+import { useRevealAnimations } from '../composables/useRevealAnimations';
 import localAboutContent from '../../content/about.json';
-import localCtaContent from '../../content/cta.json';
 import localSocialContent from '../../content/social.json';
-import { fetchAboutUsContentFromSanity, fetchPageCtaContentFromSanity, fetchSocialContentFromSanity } from '../utils/sanity';
+import { fetchAboutUsContentFromSanity, fetchSocialContentFromSanity } from '../utils/sanity';
 
 const heroFallback = {
     eyebrow: 'About Us',
-    title: 'A small team, real hands, stories you can wear.',
-    description: 'This is not a showroom. It is a guided craft session where your ring becomes part of your travel memory.',
+    title: 'How The Ring Experience was born',
+    description: 'A story of craft, travel, and meaningful memories.',
     backgroundImage: heroFallbackImage
 };
 
 const approachFallback = {
-    eyebrow: 'Our approach',
-    title: 'Less performance, more substance',
-    paragraphOne: 'The Ring Experience was built for people who want to remember a moment, not just purchase an object.',
-    paragraphTwo: 'Our role is simple: to turn shared time into a meaningful piece made by your own hands.'
+    eyebrow: 'Our vision',
+    title: 'A quiet alternative to mass tourism',
+    paragraphOne: 'We designed a format where visitors create something meaningful, guided by real artisanship.',
+    paragraphTwo: 'The focus is not selling products, but shaping a memory that lasts.',
+    image: heroFallbackImage
 };
 
-const packagesSectionFallback = {
-    eyebrow: 'Packages',
-    heading: 'Choose the pace of your experience',
-    description: 'Same artisanal core, different formats based on time and level of personalization.',
-    ctaLabel: 'Book this package'
+const originFallback = {
+    eyebrow: 'How it started',
+    title: 'From idea to shared ritual',
+    paragraphOne: 'The project started with one simple question: can a traveler leave with something that truly belongs to their story?',
+    paragraphTwo: 'The answer became this experience: a small table, real tools, and a moment people remember.',
+    image: heroFallbackImage
 };
-
-const packagesFallback = [
-    {
-        tag: 'Starter',
-        name: 'Essential',
-        duration: '90 minutes',
-        description: 'Guided session with material introduction, core techniques, and final ring finishing.',
-        price: ''
-    },
-    {
-        tag: 'For couples',
-        name: 'Couple Ritual',
-        duration: '2 hours',
-        description: 'A complete couple format with shared design choices, engraving options, and dedicated assistance.',
-        price: ''
-    },
-    {
-        tag: 'Tailored',
-        name: 'Signature',
-        duration: '2.5 hours',
-        description: 'Extended one-to-one direction with premium materials and deeper customization.',
-        price: ''
-    }
-];
 
 const cmsAboutContent = ref(localAboutContent);
-const cmsCtaContent = ref(localCtaContent);
 const cmsSocialContent = ref(localSocialContent);
+const aboutRoot = ref(null);
+const { setupRevealAnimations } = useRevealAnimations(aboutRoot);
 
-const heroContent = computed(() => ({
-    ...heroFallback,
-    ...(cmsAboutContent.value?.hero ?? {})
-}));
-
-const approachContent = computed(() => ({
-    ...approachFallback,
-    ...(cmsAboutContent.value?.approach ?? {})
-}));
-
-const packagesSectionContent = computed(() => ({
-    ...packagesSectionFallback,
-    ...(cmsAboutContent.value?.packagesSection ?? {})
-}));
-
-const packagesContent = computed(() => (
-    Array.isArray(cmsAboutContent.value?.packages) && cmsAboutContent.value.packages.length
-        ? cmsAboutContent.value.packages
-        : packagesFallback
-));
-
-const aboutCtaContent = computed(() => ({
-    ...(cmsCtaContent.value?.about ?? {})
-}));
+const heroContent = computed(() => ({ ...heroFallback, ...(cmsAboutContent.value?.hero ?? {}) }));
+const approachContent = computed(() => ({ ...approachFallback, ...(cmsAboutContent.value?.approach ?? {}) }));
+const originContent = computed(() => ({ ...originFallback, ...(cmsAboutContent.value?.origin ?? {}) }));
 
 onMounted(async () => {
-    const sanityAbout = await fetchAboutUsContentFromSanity();
-    const sanityCta = await fetchPageCtaContentFromSanity();
-    const sanitySocial = await fetchSocialContentFromSanity();
-
-    if (sanityAbout) {
-        cmsAboutContent.value = sanityAbout;
-    }
-    if (sanityCta) {
-        cmsCtaContent.value = sanityCta;
-    }
-
-    if (sanitySocial) {
-        cmsSocialContent.value = sanitySocial;
-    }
+    const [sanityAbout, sanitySocial] = await Promise.all([
+        fetchAboutUsContentFromSanity(),
+        fetchSocialContentFromSanity()
+    ]);
+    if (sanityAbout) cmsAboutContent.value = sanityAbout;
+    if (sanitySocial) cmsSocialContent.value = sanitySocial;
+    await nextTick();
+    setupRevealAnimations();
 });
 </script>

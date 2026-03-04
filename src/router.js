@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Homepage from './pages/Homepage.vue'
 import AboutUs from './pages/AboutUs.vue'
+import OurOffers from './pages/OurOffers.vue'
 import Gemstones from './pages/Gemstones.vue'
 import Gallery from './pages/Gallery.vue'
 import BookExperience from './pages/BookExperience.vue'
@@ -16,6 +17,16 @@ const routes = [
             seo: {
                 title: 'The Ring Experience | Crea il tuo anello in Sri Lanka',
                 description: 'Vivi un\'esperienza unica in Sri Lanka: crea un anello in argento sterling con pietre naturali locali, guidato da artigiani esperti.'
+            }
+        }
+    },
+    {
+        path: '/ouroffers',
+        component: OurOffers,
+        meta: {
+            seo: {
+                title: 'Our Offers | The Ring Experience Sri Lanka',
+                description: 'Scopri tutti i pacchetti disponibili di The Ring Experience e scegli il formato più adatto al tuo viaggio in Sri Lanka.'
             }
         }
     },

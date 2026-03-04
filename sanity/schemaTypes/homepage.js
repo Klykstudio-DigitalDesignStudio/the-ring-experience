@@ -12,6 +12,8 @@ export default {
                 { name: 'subheadline', title: 'Subheadline', type: 'text', rows: 3 },
                 { name: 'buttonLabel', title: 'Button Label', type: 'string' },
                 { name: 'buttonLink', title: 'Button Link', type: 'string', initialValue: '/bookexperience' },
+                { name: 'secondaryButtonLabel', title: 'Secondary Button Label', type: 'string', initialValue: 'Discover our offers' },
+                { name: 'secondaryButtonLink', title: 'Secondary Button Link', type: 'string', initialValue: '/ouroffers' },
                 {
                     name: 'mediaType',
                     title: 'Hero Media Type',
@@ -95,18 +97,54 @@ export default {
             ]
         },
         {
+            name: 'packagesPreview',
+            title: 'Packages Preview',
+            type: 'object',
+            fields: [
+                { name: 'enabled', title: 'Enabled', type: 'boolean', initialValue: true },
+                { name: 'eyebrow', title: 'Subtitle', type: 'string' },
+                { name: 'heading', title: 'Heading', type: 'string' },
+                { name: 'description', title: 'Description', type: 'text', rows: 3 },
+                { name: 'ctaLabel', title: 'CTA Label', type: 'string', initialValue: 'Discover all offers' },
+                { name: 'ctaLink', title: 'CTA Link', type: 'string', initialValue: '/ouroffers' }
+            ]
+        },
+        {
             name: 'reviews',
             title: 'Reviews',
             type: 'object',
             fields: [
+                { name: 'enabled', title: 'Enabled', type: 'boolean', initialValue: true },
                 { name: 'eyebrow', title: 'Subtitle', type: 'string' },
                 { name: 'heading', title: 'Heading', type: 'string' },
                 { name: 'description', title: 'Description', type: 'text', rows: 3 },
                 { name: 'sourceLabel', title: 'Source Label', type: 'string' },
                 { name: 'sourceUrl', title: 'Source URL', type: 'url' },
+                { name: 'embedUrl', title: 'Reviews Embed URL (Optional)', type: 'url' },
+                {
+                    name: 'sourceType',
+                    title: 'Source Type',
+                    type: 'string',
+                    initialValue: 'manual',
+                    options: {
+                        list: [
+                            { title: 'Manual Reviews', value: 'manual' },
+                            { title: 'Google Reviews (Automatic)', value: 'google' }
+                        ],
+                        layout: 'radio'
+                    }
+                },
+                { name: 'googlePlaceId', title: 'Google Place ID', type: 'string' },
+                {
+                    name: 'maxItems',
+                    title: 'Maximum Reviews to Show',
+                    type: 'number',
+                    initialValue: 9,
+                    validation: (Rule) => Rule.min(3).max(20)
+                },
                 {
                     name: 'items',
-                    title: 'Items',
+                    title: 'Manual Items',
                     type: 'array',
                     of: [{
                         type: 'object',

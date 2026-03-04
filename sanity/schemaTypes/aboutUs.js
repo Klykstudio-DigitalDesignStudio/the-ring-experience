@@ -16,13 +16,26 @@ export default {
         },
         {
             name: 'approach',
-            title: 'Approach',
+            title: 'Content Block One',
             type: 'object',
             fields: [
                 { name: 'eyebrow', title: 'Subtitle', type: 'string' },
                 { name: 'title', title: 'Title', type: 'string' },
                 { name: 'paragraphOne', title: 'Paragraph One', type: 'text', rows: 3 },
-                { name: 'paragraphTwo', title: 'Paragraph Two', type: 'text', rows: 3 }
+                { name: 'paragraphTwo', title: 'Paragraph Two', type: 'text', rows: 3 },
+                { name: 'image', title: 'Image', type: 'image', options: { hotspot: true, accept: 'image/webp' } }
+            ]
+        },
+        {
+            name: 'origin',
+            title: 'Content Block Two',
+            type: 'object',
+            fields: [
+                { name: 'eyebrow', title: 'Subtitle', type: 'string' },
+                { name: 'title', title: 'Title', type: 'string' },
+                { name: 'paragraphOne', title: 'Paragraph One', type: 'text', rows: 3 },
+                { name: 'paragraphTwo', title: 'Paragraph Two', type: 'text', rows: 3 },
+                { name: 'image', title: 'Image', type: 'image', options: { hotspot: true, accept: 'image/webp' } }
             ]
         },
         {
