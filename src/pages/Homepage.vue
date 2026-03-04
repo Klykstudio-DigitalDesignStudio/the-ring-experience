@@ -327,6 +327,39 @@ const setupHomepageAnimations = () => {
         });
         mediaMatcher.add('(prefers-reduced-motion: no-preference)', () => {
             gsap.from('.hero-copy > *', { autoAlpha: 0, y: 24, duration: 0.85, ease: 'power2.out', stagger: 0.1 });
+            gsap.utils.toArray('[data-reveal]').forEach((section) => {
+                gsap.from(section, {
+                    autoAlpha: 0,
+                    y: 18,
+                    duration: 0.7,
+                    ease: 'power2.out',
+                    overwrite: 'auto',
+                    immediateRender: false,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 90%',
+                        toggleActions: 'play none none none',
+                        once: true
+                    }
+                });
+            });
+            if (experienceGrid.value) {
+                gsap.from(experienceGrid.value.querySelectorAll('.experience-card'), {
+                    autoAlpha: 0,
+                    y: 14,
+                    duration: 0.58,
+                    ease: 'power2.out',
+                    stagger: 0.06,
+                    overwrite: 'auto',
+                    immediateRender: false,
+                    scrollTrigger: {
+                        trigger: experienceGrid.value,
+                        start: 'top 90%',
+                        toggleActions: 'play none none none',
+                        once: true
+                    }
+                });
+            }
         });
     }, homepageRoot.value);
 };

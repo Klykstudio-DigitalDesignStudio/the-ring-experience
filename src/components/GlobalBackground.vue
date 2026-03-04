@@ -1,7 +1,8 @@
 <template>
     <div class="pointer-events-none fixed inset-0 -z-20 overflow-hidden">
-        <img :src="resolvedImage" alt="" aria-hidden="true" class="h-full w-full object-cover object-center opacity-16">
-        <div class="absolute inset-0 bg-white/68"></div>
+        <img :src="resolvedImage" alt="" aria-hidden="true" class="h-full w-full object-cover object-center opacity-12">
+        <div class="absolute inset-0"
+            style="background: color-mix(in srgb, var(--color-lightbeige) 74%, transparent);"></div>
     </div>
 </template>
 
