@@ -32,10 +32,16 @@ npx vite build
 npm run preview
 ```
 
-Build frontend + embedded `/admin` studio bundle:
+Default build (frontend + embedded `/admin` studio bundle):
 
 ```bash
-npm run build:with-studio
+npm run build
+```
+
+Frontend-only build (without embedded `/admin`):
+
+```bash
+npm run build:frontend
 ```
 
 ## Environment Variables
