@@ -223,7 +223,7 @@ const submitByEmail = async () => {
     }
 
     submitState.value = 'success';
-    submitMessage.value = "Thank you. We'll get back to you in a few.";
+    submitMessage.value = 'We will be back as soon as possible';
     form.name = '';
     form.email = '';
     form.phoneNumber = '';
