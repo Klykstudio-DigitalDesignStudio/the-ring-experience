@@ -112,51 +112,6 @@ async function appendLeadToSheet(env, leadData) {
   }
 }
 
-async function sendEmail(env, leadData) {
-  const apiKey = env.RESEND_API_KEY;
-  const emailFrom = env.LEAD_EMAIL_FROM;
-  if (!apiKey || !emailFrom) throw new Error('missing_email_env');
-  if (!leadData.recipientEmail) throw new Error('missing_recipient_email');
-
-  const subject = `[Lead] ${leadData.source || 'Website'} - ${leadData.name || 'Guest'}`;
-  const text = [
-    'New lead received',
-    '',
-    `Source: ${leadData.source || '-'}`,
-    `Package: ${leadData.packageName || '-'}`,
-    `Name: ${leadData.name || '-'}`,
-    `Email: ${leadData.email || '-'}`,
-    `Phone: ${leadData.phone || '-'}`,
-    `Preferred date: ${leadData.preferredDate || '-'}`,
-    `Newsletter consent: ${leadData.newsletterConsent ? 'Yes' : 'No'}`,
-    '',
-    'Message:',
-    leadData.message || '-',
-    '',
-    `Submitted at: ${leadData.submittedAt || new Date().toISOString()}`,
-  ].join('\n');
-
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      authorization: `Bearer ${apiKey}`,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: emailFrom,
-      to: [leadData.recipientEmail],
-      subject,
-      text,
-      reply_to: leadData.email || undefined,
-    }),
-  });
-
-  if (!response.ok) {
-    const detail = await response.text();
-    throw new Error(`email_send_failed:${detail}`);
-  }
-}
-
 export async function onRequestPost(context) {
   try {
     const leadData = await context.request.json();
@@ -165,7 +120,7 @@ export async function onRequestPost(context) {
       return textResponse({ ok: false, error: 'missing_required_fields' }, 400);
     }
 
-    await Promise.all([sendEmail(context.env, leadData), appendLeadToSheet(context.env, leadData)]);
+    await appendLeadToSheet(context.env, leadData);
     return textResponse({ ok: true });
   } catch (error) {
     return textResponse(

@@ -54,8 +54,6 @@ Create `.env` from `.env.example` and set:
 
 For Cloudflare form handling (`/api/lead`), set these in Cloudflare Pages variables:
 
-- `RESEND_API_KEY`
-- `LEAD_EMAIL_FROM` (verified sender in Resend, e.g. `Leads <noreply@yourdomain.com>`)
 - `GOOGLE_SHEETS_CLIENT_EMAIL` (service account email)
 - `GOOGLE_SHEETS_PRIVATE_KEY` (service account private key, keep `\n` line breaks)
 - `GOOGLE_SHEETS_SPREADSHEET_ID`
@@ -70,7 +68,6 @@ For Cloudflare form handling (`/api/lead`), set these in Cloudflare Pages variab
 ## Forms
 
 - Forms submit to internal endpoint `/api/lead` (no `mailto` popup).
-- Backend sends email to `contactForm.recipientEmail` from CMS.
 - Backend appends lead rows to Google Sheets API.
 - Email/phone are written to sheet only when newsletter consent is true.
 

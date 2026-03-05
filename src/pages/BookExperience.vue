@@ -135,22 +135,13 @@ const submitByEmail = async () => {
     submitState.value = 'idle';
     submitMessage.value = '';
 
-    const recipientEmail = (mergedFormContent.value.recipientEmail || '').trim();
-    if (!recipientEmail) {
-        submitState.value = 'error';
-        submitMessage.value = 'Recipient email is not configured yet.';
-        isSubmitting.value = false;
-        return;
-    }
-
     const saved = await submitLead({
         source: 'book-experience',
         packageName: form.packageName || '',
         name: form.name,
         email: form.email,
         message: form.message || '',
-        newsletterConsent: Boolean(form.newsletterConsent),
-        recipientEmail
+        newsletterConsent: Boolean(form.newsletterConsent)
     });
 
     if (!saved) {

@@ -192,14 +192,6 @@ const submitByEmail = async () => {
     submitState.value = 'idle';
     submitMessage.value = '';
 
-    const recipientEmail = (mergedFormContent.value.recipientEmail || '').trim();
-    if (!recipientEmail) {
-        submitState.value = 'error';
-        submitMessage.value = 'Recipient email is not configured yet.';
-        isSubmitting.value = false;
-        return;
-    }
-
     const saved = await submitLead({
         source: 'our-offers',
         packageName: form.packageName,
@@ -207,8 +199,7 @@ const submitByEmail = async () => {
         email: form.email,
         phone: form.phone || '',
         message: form.message || '',
-        newsletterConsent: Boolean(form.newsletterConsent),
-        recipientEmail
+        newsletterConsent: Boolean(form.newsletterConsent)
     });
 
     if (!saved) {
