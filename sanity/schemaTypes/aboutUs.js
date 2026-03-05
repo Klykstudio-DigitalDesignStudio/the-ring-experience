@@ -39,6 +39,16 @@ export default {
             ]
         },
         {
+            name: 'reasonToExist',
+            title: 'Reason To Exist',
+            type: 'object',
+            fields: [
+                { name: 'eyebrow', title: 'Subtitle', type: 'string' },
+                { name: 'heading', title: 'Heading', type: 'string' },
+                { name: 'description', title: 'Description', type: 'text', rows: 3 }
+            ]
+        },
+        {
             name: 'packagesSection',
             title: 'Packages Section',
             type: 'object',
@@ -77,3 +87,4 @@ export default {
         }
     }
 };
+

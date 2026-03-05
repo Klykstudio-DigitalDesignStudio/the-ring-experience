@@ -2,7 +2,7 @@
     <main id="bookExperience" ref="bookRoot" class="w-full">
         <section data-reveal class="w-full pt-28 pb-20 sm:pt-32 sm:pb-24 lg:pt-36 lg:pb-28">
             <div class="mx-auto w-11/12 sm:w-10/12">
-                <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
+                <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-start">
                     <article class="book-card border bg-white/80 p-6 sm:p-8 lg:col-span-5"
                         style="border-color: color-mix(in srgb, var(--color-darkbrown) 18%, transparent);">
                         <h3 class="font-display text-3xl text-(--color-brown)">Send a request</h3>
@@ -34,7 +34,7 @@
                                     class="rounded-sm border border-[#7B6248]/45 bg-white px-3 py-2 text-(--color-brown) outline-none focus:border-(--color-noisette) focus:ring-2 focus:ring-[#B08942]/35"></textarea>
                             </label>
                             <label class="flex items-start gap-3">
-                                <input v-model="form.newsletterConsent" required type="checkbox"
+                                <input v-model="form.newsletterConsent" type="checkbox"
                                     class="mt-1 h-4 w-4 rounded border-[#7B6248]/45 text-(--color-noisette) focus:ring-[#B08942]/35">
                                 <span class="text-sm text-(--color-brown)" style="opacity: 0.9;">{{ mergedFormContent.newsletterConsentLabel }}</span>
                             </label>
@@ -58,7 +58,7 @@
                             </p>
                         </div>
                         <iframe v-if="calendlyEmbedUrl" :src="calendlyEmbedUrl" title="Calendly booking"
-                            class="h-[760px] w-full border-0"></iframe>
+                            class="h-[700px] w-full border-0 sm:h-[740px] lg:h-[680px] xl:h-[720px]"></iframe>
                         <p v-else class="p-8 text-center text-(--color-brown)" style="opacity: 0.75;">
                             Add a Calendly link from CMS to show the scheduler.
                         </p>
@@ -152,7 +152,7 @@ const submitByEmail = async () => {
     }
 
     submitState.value = 'success';
-    submitMessage.value = 'Request sent successfully.';
+    submitMessage.value = "Thank you. We'll get back to you in a few.";
     form.packageName = '';
     form.name = '';
     form.email = '';
@@ -182,3 +182,4 @@ onMounted(async () => {
     setupRevealAnimations();
 });
 </script>
+

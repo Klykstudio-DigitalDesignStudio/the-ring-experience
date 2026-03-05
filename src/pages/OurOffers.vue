@@ -73,8 +73,14 @@
                     </label>
                     <label class="flex flex-col gap-2">
                         <span class="text-sm font-medium text-(--color-brown)">Phone / WhatsApp</span>
-                        <input v-model.trim="form.phone" type="text"
-                            class="h-11 rounded-sm border border-[#7B6248]/45 bg-white px-3 text-(--color-brown) outline-none focus:border-(--color-noisette) focus:ring-2 focus:ring-[#B08942]/35">
+                        <div class="grid grid-cols-[8rem_1fr] gap-2">
+                            <select v-model="form.phoneCode"
+                                class="h-11 rounded-sm border border-[#7B6248]/45 bg-white px-2 text-sm text-(--color-brown) outline-none focus:border-(--color-noisette) focus:ring-2 focus:ring-[#B08942]/35">
+                                <option v-for="code in phoneCodes" :key="code.value" :value="code.value">{{ code.label }}</option>
+                            </select>
+                            <input v-model.trim="form.phoneNumber" type="tel" placeholder="Phone number"
+                                class="h-11 rounded-sm border border-[#7B6248]/45 bg-white px-3 text-(--color-brown) outline-none focus:border-(--color-noisette) focus:ring-2 focus:ring-[#B08942]/35">
+                        </div>
                     </label>
                     <label class="md:col-span-2 flex flex-col gap-2">
                         <span class="text-sm font-medium text-(--color-brown)">Message</span>
@@ -82,7 +88,7 @@
                             class="rounded-sm border border-[#7B6248]/45 bg-white px-3 py-2 text-(--color-brown) outline-none focus:border-(--color-noisette) focus:ring-2 focus:ring-[#B08942]/35"></textarea>
                     </label>
                     <label class="md:col-span-2 flex items-start gap-3">
-                        <input v-model="form.newsletterConsent" required type="checkbox"
+                        <input v-model="form.newsletterConsent" type="checkbox"
                             class="mt-1 h-4 w-4 rounded border-[#7B6248]/45 text-(--color-noisette) focus:ring-[#B08942]/35">
                         <span class="text-sm text-(--color-brown)" style="opacity: 0.9;">{{ mergedFormContent.newsletterConsentLabel }}</span>
                     </label>
@@ -110,6 +116,7 @@ import GemstonesOffersCallout from '../components/GemstonesOffersCallout.vue';
 import SocialSection from '../components/SocialSection.vue';
 import { useRevealAnimations } from '../composables/useRevealAnimations';
 import { submitLead } from '../utils/leads';
+import { phoneCodes } from '../utils/phoneCodes';
 import { fetchContactFormContentFromSanity, fetchOffersPageContentFromSanity, fetchSocialContentFromSanity } from '../utils/sanity';
 
 const route = useRoute();
@@ -154,13 +161,19 @@ const form = reactive({
     packageName: '',
     name: '',
     email: '',
-    phone: '',
+    phoneCode: '+94',
+    phoneNumber: '',
     message: '',
     newsletterConsent: false
 });
 const isSubmitting = ref(false);
 const submitState = ref('idle');
 const submitMessage = ref('');
+
+const getFullPhone = () => {
+    const number = (form.phoneNumber || '').trim();
+    return number ? `${form.phoneCode} ${number}` : '';
+};
 
 const scrollToOffersForm = ({ behavior = 'smooth' } = {}) => {
     const formSection = document.getElementById('offers-form');
@@ -197,7 +210,7 @@ const submitByEmail = async () => {
         packageName: form.packageName,
         name: form.name,
         email: form.email,
-        phone: form.phone || '',
+        phone: getFullPhone(),
         message: form.message || '',
         newsletterConsent: Boolean(form.newsletterConsent)
     });
@@ -210,10 +223,10 @@ const submitByEmail = async () => {
     }
 
     submitState.value = 'success';
-    submitMessage.value = 'Request sent successfully.';
+    submitMessage.value = "Thank you. We'll get back to you in a few.";
     form.name = '';
     form.email = '';
-    form.phone = '';
+    form.phoneNumber = '';
     form.message = '';
     form.newsletterConsent = false;
     isSubmitting.value = false;

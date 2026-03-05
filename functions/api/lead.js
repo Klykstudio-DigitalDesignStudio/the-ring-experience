@@ -78,8 +78,8 @@ async function appendLeadToSheet(env, leadData) {
   }
 
   const accessToken = await createGoogleAccessToken(clientEmail, privateKey);
-  const emailValue = leadData.newsletterConsent ? leadData.email || '' : '';
-  const phoneValue = leadData.newsletterConsent ? leadData.phone || '' : '';
+  const emailValue = leadData.email || '';
+  const phoneValue = leadData.phone || '';
 
   const row = [
     leadData.submittedAt || new Date().toISOString(),

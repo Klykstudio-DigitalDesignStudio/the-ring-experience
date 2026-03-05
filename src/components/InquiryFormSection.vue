@@ -28,8 +28,14 @@
 
                 <label class="flex flex-col gap-2">
                     <span class="text-sm text-(--color-brown)">Phone / WhatsApp</span>
-                    <input v-model.trim="form.phone" type="text"
-                        class="h-11 rounded-sm border border-[#7B6248]/45 bg-white px-3 text-(--color-brown) outline-none focus:border-(--color-noisette) focus:ring-2 focus:ring-[#B08942]/35">
+                    <div class="grid grid-cols-[8rem_1fr] gap-2">
+                        <select v-model="form.phoneCode"
+                            class="h-11 rounded-sm border border-[#7B6248]/45 bg-white px-2 text-sm text-(--color-brown) outline-none focus:border-(--color-noisette) focus:ring-2 focus:ring-[#B08942]/35">
+                            <option v-for="code in phoneCodes" :key="code.value" :value="code.value">{{ code.label }}</option>
+                        </select>
+                        <input v-model.trim="form.phoneNumber" type="tel" placeholder="Phone number"
+                            class="h-11 rounded-sm border border-[#7B6248]/45 bg-white px-3 text-(--color-brown) outline-none focus:border-(--color-noisette) focus:ring-2 focus:ring-[#B08942]/35">
+                    </div>
                 </label>
 
                 <label class="flex flex-col gap-2">
@@ -45,7 +51,7 @@
                 </label>
 
                 <label class="md:col-span-2 flex items-start gap-3">
-                    <input v-model="form.newsletterConsent" required type="checkbox"
+                    <input v-model="form.newsletterConsent" type="checkbox"
                         class="mt-1 h-4 w-4 rounded border-[#7B6248]/45 text-(--color-noisette) focus:ring-[#B08942]/35">
                     <span class="text-sm text-(--color-brown)" style="opacity: 0.9;">{{ mergedContent.newsletterConsentLabel }}</span>
                 </label>
@@ -66,6 +72,7 @@
 import { computed, reactive, ref } from 'vue';
 import Button from './Button.vue';
 import { submitLead } from '../utils/leads';
+import { phoneCodes } from '../utils/phoneCodes';
 
 const props = defineProps({
     content: {
@@ -89,7 +96,8 @@ const mergedContent = computed(() => ({
 const form = reactive({
     name: '',
     email: '',
-    phone: '',
+    phoneCode: '+94',
+    phoneNumber: '',
     preferredDate: '',
     message: '',
     newsletterConsent: false
@@ -97,6 +105,11 @@ const form = reactive({
 const isSubmitting = ref(false);
 const submitState = ref('idle');
 const submitMessage = ref('');
+
+const getFullPhone = () => {
+    const number = (form.phoneNumber || '').trim();
+    return number ? `${form.phoneCode} ${number}` : '';
+};
 
 const submitByEmail = async () => {
     if (isSubmitting.value) return;
@@ -108,7 +121,7 @@ const submitByEmail = async () => {
         source: 'inquiry-form-section',
         name: form.name,
         email: form.email,
-        phone: form.phone || '',
+        phone: getFullPhone(),
         preferredDate: form.preferredDate || '',
         message: form.message || '',
         newsletterConsent: Boolean(form.newsletterConsent)
@@ -122,10 +135,10 @@ const submitByEmail = async () => {
     }
 
     submitState.value = 'success';
-    submitMessage.value = 'Request sent successfully.';
+    submitMessage.value = "Thank you. We'll get back to you in a few.";
     form.name = '';
     form.email = '';
-    form.phone = '';
+    form.phoneNumber = '';
     form.preferredDate = '';
     form.message = '';
     form.newsletterConsent = false;

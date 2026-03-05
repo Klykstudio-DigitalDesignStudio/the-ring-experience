@@ -52,12 +52,12 @@
         <section data-reveal class="w-full py-16 sm:py-20 lg:py-24">
             <div class="mx-auto w-11/12 sm:w-10/12">
                 <div class="mx-auto max-w-4xl text-center">
-                    <p class="text-xs tracking-[0.2em] text-(--color-mutedbrown) uppercase">Reason to exist</p>
-                    <h3 class="mt-3 font-display text-4xl leading-tight text-(--color-brown) sm:text-5xl">
-                        We exist to turn travel moments into personal symbols.
+                    <p v-if="reasonContent.eyebrow" class="text-xs tracking-[0.2em] text-(--color-mutedbrown) uppercase">{{ reasonContent.eyebrow }}</p>
+                    <h3 v-if="reasonContent.heading" class="mt-3 font-display text-4xl leading-tight text-(--color-brown) sm:text-5xl">
+                        {{ reasonContent.heading }}
                     </h3>
-                    <p class="mx-auto mt-5 max-w-3xl text-base text-(--color-brown) sm:text-lg" style="opacity: 0.88;">
-                        Every session is designed so people do not just buy a souvenir. They create a memory with their own hands, guided by real craftsmanship.
+                    <p v-if="reasonContent.description" class="mx-auto mt-5 max-w-3xl text-base text-(--color-brown) sm:text-lg" style="opacity: 0.88;">
+                        {{ reasonContent.description }}
                     </p>
                 </div>
             </div>
@@ -99,6 +99,11 @@ const originContent = computed(() => ({
     paragraphTwo: cmsAboutContent.value?.origin?.paragraphTwo ?? '',
     image: cmsAboutContent.value?.origin?.image ?? ''
 }));
+const reasonContent = computed(() => ({
+    eyebrow: cmsAboutContent.value?.reasonToExist?.eyebrow ?? '',
+    heading: cmsAboutContent.value?.reasonToExist?.heading ?? '',
+    description: cmsAboutContent.value?.reasonToExist?.description ?? ''
+}));
 
 onMounted(async () => {
     const [sanityAbout, sanitySocial] = await Promise.all([
@@ -111,3 +116,4 @@ onMounted(async () => {
     setupRevealAnimations();
 });
 </script>
+

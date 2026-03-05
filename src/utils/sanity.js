@@ -125,6 +125,11 @@ const ABOUT_US_QUERY = `
     paragraphTwo,
     "image": image.asset->url
   },
+  reasonToExist{
+    eyebrow,
+    heading,
+    description
+  },
   packagesSection{
     eyebrow,
     heading,
@@ -492,3 +497,4 @@ export async function fetchNavbarContentFromSanity() {
 export async function fetchSiteAppearanceContentFromSanity() {
     return fetchFromSanity(SITE_APPEARANCE_QUERY);
 }
+
