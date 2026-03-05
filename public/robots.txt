@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://the-ring-experience.com/sitemap.xml
+Host: the-ring-experience.com
