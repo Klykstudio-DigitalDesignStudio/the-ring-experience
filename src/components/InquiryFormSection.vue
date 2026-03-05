@@ -65,7 +65,7 @@
 <script setup>
 import { computed, reactive, ref } from 'vue';
 import Button from './Button.vue';
-import { saveLeadToSheet } from '../utils/leads';
+import { submitLead } from '../utils/leads';
 
 const props = defineProps({
     content: {
@@ -80,7 +80,6 @@ const mergedContent = computed(() => ({
     heading: props.content?.heading ?? 'Tell us what you have in mind',
     description: props.content?.description ?? 'Send your request and we will confirm details shortly.',
     recipientEmail: props.content?.recipientEmail ?? 'hello@the-ring-experience.com',
-    sheetWebhookUrl: props.content?.sheetWebhookUrl ?? '',
     subjectPrefix: props.content?.subjectPrefix ?? 'New Inquiry',
     submitLabel: props.content?.submitLabel ?? 'Send request',
     privacyNote: props.content?.privacyNote ?? 'By sending this form you consent to be contacted about your booking request.',
@@ -105,27 +104,24 @@ const submitByEmail = async () => {
     submitState.value = 'idle';
     submitMessage.value = '';
 
-    const webhookUrl = (mergedContent.value.sheetWebhookUrl || '').trim();
-    if (!webhookUrl) {
+    const recipientEmail = (mergedContent.value.recipientEmail || '').trim();
+    if (!recipientEmail) {
         submitState.value = 'error';
-        submitMessage.value = 'Form endpoint is not configured yet.';
+        submitMessage.value = 'Recipient email is not configured yet.';
         isSubmitting.value = false;
         return;
     }
 
-    let saved = true;
-    if (form.newsletterConsent) {
-        saved = await saveLeadToSheet(webhookUrl, {
-            source: 'inquiry-form-section',
-            name: form.name,
-            email: form.email,
-            phone: form.phone || '',
-            preferredDate: form.preferredDate || '',
-            message: form.message || '',
-            newsletterConsent: true,
-            recipientEmail: mergedContent.value.recipientEmail
-        });
-    }
+    const saved = await submitLead({
+        source: 'inquiry-form-section',
+        name: form.name,
+        email: form.email,
+        phone: form.phone || '',
+        preferredDate: form.preferredDate || '',
+        message: form.message || '',
+        newsletterConsent: Boolean(form.newsletterConsent),
+        recipientEmail
+    });
 
     if (!saved) {
         submitState.value = 'error';

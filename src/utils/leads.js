@@ -13,21 +13,23 @@ function withTimeout(promise, timeoutMs = 1600) {
     });
 }
 
-export async function saveLeadToSheet(webhookUrl, payload) {
-    if (!webhookUrl || typeof webhookUrl !== 'string') return false;
-    if (!/^https?:\/\//i.test(webhookUrl)) return false;
-
+export async function submitLead(payload) {
     const body = {
         ...payload,
         submittedAt: new Date().toISOString()
     };
 
-    const request = fetch(webhookUrl, {
+    const request = fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
         keepalive: true
     });
 
-    return withTimeout(request, 1600);
+    return withTimeout(
+        request.then((response) => {
+            if (!response.ok) throw new Error('Lead API failed');
+        }),
+        4000
+    );
 }

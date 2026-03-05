@@ -77,7 +77,7 @@ import { useRoute } from 'vue-router';
 import Button from '../components/Button.vue';
 import SocialSection from '../components/SocialSection.vue';
 import { useRevealAnimations } from '../composables/useRevealAnimations';
-import { saveLeadToSheet } from '../utils/leads';
+import { submitLead } from '../utils/leads';
 import { fetchBookingPageContentFromSanity, fetchContactFormContentFromSanity, fetchOffersPageContentFromSanity, fetchSocialContentFromSanity } from '../utils/sanity';
 
 const route = useRoute();
@@ -98,7 +98,6 @@ const calendlyContent = computed(() => ({
 }));
 const mergedFormContent = computed(() => ({
     recipientEmail: cmsFormContent.value?.recipientEmail ?? 'hello@the-ring-experience.com',
-    sheetWebhookUrl: cmsFormContent.value?.sheetWebhookUrl ?? '',
     subjectPrefix: cmsFormContent.value?.subjectPrefix ?? 'Booking Request',
     submitLabel: cmsFormContent.value?.submitLabel ?? 'Send request',
     newsletterConsentLabel: cmsFormContent.value?.newsletterConsentLabel ?? 'I consent to store my email and phone for newsletter and updates.'
@@ -136,26 +135,23 @@ const submitByEmail = async () => {
     submitState.value = 'idle';
     submitMessage.value = '';
 
-    const webhookUrl = (mergedFormContent.value.sheetWebhookUrl || '').trim();
-    if (!webhookUrl) {
+    const recipientEmail = (mergedFormContent.value.recipientEmail || '').trim();
+    if (!recipientEmail) {
         submitState.value = 'error';
-        submitMessage.value = 'Form endpoint is not configured yet.';
+        submitMessage.value = 'Recipient email is not configured yet.';
         isSubmitting.value = false;
         return;
     }
 
-    let saved = true;
-    if (form.newsletterConsent) {
-        saved = await saveLeadToSheet(webhookUrl, {
-            source: 'book-experience',
-            packageName: form.packageName || '',
-            name: form.name,
-            email: form.email,
-            message: form.message || '',
-            newsletterConsent: true,
-            recipientEmail: mergedFormContent.value.recipientEmail
-        });
-    }
+    const saved = await submitLead({
+        source: 'book-experience',
+        packageName: form.packageName || '',
+        name: form.name,
+        email: form.email,
+        message: form.message || '',
+        newsletterConsent: Boolean(form.newsletterConsent),
+        recipientEmail
+    });
 
     if (!saved) {
         submitState.value = 'error';

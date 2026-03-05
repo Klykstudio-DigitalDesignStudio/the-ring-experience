@@ -109,7 +109,7 @@ import Button from '../components/Button.vue';
 import GemstonesOffersCallout from '../components/GemstonesOffersCallout.vue';
 import SocialSection from '../components/SocialSection.vue';
 import { useRevealAnimations } from '../composables/useRevealAnimations';
-import { saveLeadToSheet } from '../utils/leads';
+import { submitLead } from '../utils/leads';
 import { fetchContactFormContentFromSanity, fetchOffersPageContentFromSanity, fetchSocialContentFromSanity } from '../utils/sanity';
 
 const route = useRoute();
@@ -137,7 +137,6 @@ const mergedFormContent = computed(() => ({
     heading: cmsFormContent.value?.heading ?? '',
     description: cmsFormContent.value?.description ?? '',
     recipientEmail: cmsFormContent.value?.recipientEmail ?? 'hello@the-ring-experience.com',
-    sheetWebhookUrl: cmsFormContent.value?.sheetWebhookUrl ?? '',
     subjectPrefix: cmsFormContent.value?.subjectPrefix ?? 'Offer Request',
     submitLabel: cmsFormContent.value?.submitLabel ?? 'Send request',
     privacyNote: cmsFormContent.value?.privacyNote ?? 'By sending this form, you consent to be contacted regarding your request.',
@@ -193,27 +192,24 @@ const submitByEmail = async () => {
     submitState.value = 'idle';
     submitMessage.value = '';
 
-    const webhookUrl = (mergedFormContent.value.sheetWebhookUrl || '').trim();
-    if (!webhookUrl) {
+    const recipientEmail = (mergedFormContent.value.recipientEmail || '').trim();
+    if (!recipientEmail) {
         submitState.value = 'error';
-        submitMessage.value = 'Form endpoint is not configured yet.';
+        submitMessage.value = 'Recipient email is not configured yet.';
         isSubmitting.value = false;
         return;
     }
 
-    let saved = true;
-    if (form.newsletterConsent) {
-        saved = await saveLeadToSheet(webhookUrl, {
-            source: 'our-offers',
-            packageName: form.packageName,
-            name: form.name,
-            email: form.email,
-            phone: form.phone || '',
-            message: form.message || '',
-            newsletterConsent: true,
-            recipientEmail: mergedFormContent.value.recipientEmail
-        });
-    }
+    const saved = await submitLead({
+        source: 'our-offers',
+        packageName: form.packageName,
+        name: form.name,
+        email: form.email,
+        phone: form.phone || '',
+        message: form.message || '',
+        newsletterConsent: Boolean(form.newsletterConsent),
+        recipientEmail
+    });
 
     if (!saved) {
         submitState.value = 'error';

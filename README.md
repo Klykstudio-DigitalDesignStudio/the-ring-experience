@@ -52,6 +52,15 @@ Create `.env` from `.env.example` and set:
 - `VITE_SANITY_DATASET`
 - `VITE_GOOGLE_PLACES_API_KEY` (only if using Google reviews)
 
+For Cloudflare form handling (`/api/lead`), set these in Cloudflare Pages variables:
+
+- `RESEND_API_KEY`
+- `LEAD_EMAIL_FROM` (verified sender in Resend, e.g. `Leads <noreply@yourdomain.com>`)
+- `GOOGLE_SHEETS_CLIENT_EMAIL` (service account email)
+- `GOOGLE_SHEETS_PRIVATE_KEY` (service account private key, keep `\n` line breaks)
+- `GOOGLE_SHEETS_SPREADSHEET_ID`
+- `GOOGLE_SHEETS_RANGE` (optional, default: `Sheet1!A:I`)
+
 ## CMS Notes
 
 - Sanity Studio is configured with `basePath: /admin`.
@@ -60,9 +69,10 @@ Create `.env` from `.env.example` and set:
 
 ## Forms
 
-- Forms send an email via `mailto` to `contactForm.recipientEmail` from CMS.
-- Optional lead save to Google Sheet webhook via `contactForm.sheetWebhookUrl`.
-- Lead save happens only when newsletter consent is checked.
+- Forms submit to internal endpoint `/api/lead` (no `mailto` popup).
+- Backend sends email to `contactForm.recipientEmail` from CMS.
+- Backend appends lead rows to Google Sheets API.
+- Email/phone are written to sheet only when newsletter consent is true.
 
 ## Build Notes
 

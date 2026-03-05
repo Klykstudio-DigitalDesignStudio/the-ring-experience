@@ -252,7 +252,6 @@ const CONTACT_FORM_QUERY = `
   heading,
   description,
   recipientEmail,
-  sheetWebhookUrl,
   subjectPrefix,
   submitLabel,
   privacyNote,

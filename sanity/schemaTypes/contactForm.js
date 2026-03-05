@@ -8,7 +8,6 @@ export default {
         { name: 'heading', title: 'Heading', type: 'string' },
         { name: 'description', title: 'Description', type: 'text', rows: 3 },
         { name: 'recipientEmail', title: 'Recipient Email', type: 'string' },
-        { name: 'sheetWebhookUrl', title: 'Google Sheet Webhook URL', type: 'url' },
         { name: 'subjectPrefix', title: 'Email Subject Prefix', type: 'string' },
         { name: 'submitLabel', title: 'Submit Button Label', type: 'string' },
         { name: 'privacyNote', title: 'Privacy Note', type: 'text', rows: 2 },
