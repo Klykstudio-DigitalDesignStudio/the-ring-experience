@@ -1,5 +1,7 @@
 <template>
     <main id="bookExperience" ref="bookRoot" class="w-full">
+        <SecondaryHero :content="heroContent" />
+
         <section data-reveal class="w-full pt-28 pb-20 sm:pt-32 sm:pb-24 lg:pt-36 lg:pb-28">
             <div class="mx-auto w-11/12 sm:w-10/12">
                 <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-start">
@@ -77,6 +79,7 @@
 import { computed, nextTick, onMounted, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Button from '../components/Button.vue';
+import SecondaryHero from '../components/SecondaryHero.vue';
 import SocialSection from '../components/SocialSection.vue';
 import { useRevealAnimations } from '../composables/useRevealAnimations';
 import { submitLead } from '../utils/leads';
@@ -91,6 +94,12 @@ const cmsFormContent = ref({});
 const cmsOffersContent = ref({});
 const cmsSocialContent = ref({});
 
+const heroContent = computed(() => ({
+    eyebrow: cmsBookingContent.value?.hero?.eyebrow ?? '',
+    title: cmsBookingContent.value?.hero?.title ?? '',
+    description: cmsBookingContent.value?.hero?.description ?? '',
+    backgroundImage: cmsBookingContent.value?.hero?.backgroundImage ?? ''
+}));
 const calendlyContent = computed(() => ({
     enabled: cmsBookingContent.value?.calendly?.enabled ?? true,
     eyebrow: cmsBookingContent.value?.calendly?.eyebrow ?? '',
