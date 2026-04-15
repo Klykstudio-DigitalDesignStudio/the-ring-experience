@@ -18,6 +18,7 @@ export const deskStructure = (S) =>
                             collectionItem(S, { schemaType: 'aboutUs', title: 'About Us' }),
                             collectionItem(S, { schemaType: 'offersPage', title: 'Our Offers' }),
                             collectionItem(S, { schemaType: 'bookingPage', title: 'Book Experience' }),
+                            collectionItem(S, { schemaType: 'faqPage', title: 'FAQ' }),
                             collectionItem(S, { schemaType: 'gemstonesPage', title: 'Gemstones' }),
                             collectionItem(S, { schemaType: 'clientGallery', title: 'Gallery' })
                         ])

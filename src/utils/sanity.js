@@ -239,6 +239,30 @@ const BOOKING_PAGE_QUERY = `
 }
 `;
 
+const FAQ_PAGE_QUERY = `
+*[_type == "faqPage"][0]{
+  hero{
+    eyebrow,
+    title,
+    description
+  },
+  homepageSection{
+    enabled,
+    eyebrow,
+    heading,
+    description,
+    ctaLabel,
+    ctaLink
+  },
+  items[]|order(coalesce(homepageOrder, 999) asc){
+    question,
+    answer,
+    showOnHomepage,
+    homepageOrder
+  }
+}
+`;
+
 const CONTACT_FORM_QUERY = `
 *[_type == "contactForm"][0]{
   enabled,
@@ -467,6 +491,10 @@ export async function fetchClientGalleryContentFromSanity() {
 
 export async function fetchBookingPageContentFromSanity() {
     return fetchFromSanity(BOOKING_PAGE_QUERY);
+}
+
+export async function fetchFaqPageContentFromSanity() {
+    return fetchFromSanity(FAQ_PAGE_QUERY);
 }
 
 export async function fetchContactFormContentFromSanity() {

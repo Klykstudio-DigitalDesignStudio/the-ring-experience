@@ -10,5 +10,6 @@ import offersPage from './offersPage';
 import bookingPage from './bookingPage';
 import contactForm from './contactForm';
 import siteAppearance from './siteAppearance';
+import faqPage from './faqPage';
 
-export const schemaTypes = [homepage, footer, navbar, aboutUs, social, gemstonesPage, clientGallery, pageCta, offersPage, bookingPage, contactForm, siteAppearance];
+export const schemaTypes = [homepage, footer, navbar, aboutUs, social, gemstonesPage, clientGallery, pageCta, offersPage, bookingPage, faqPage, contactForm, siteAppearance];

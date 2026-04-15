@@ -9,6 +9,7 @@
     </router-view>
   </main>
   <Footer />
+  <MobileContactCta />
   <AnalyticsManager />
   <CookieBanner />
 </template>
@@ -21,6 +22,7 @@ import AnalyticsManager from './components/AnalyticsManager.vue'
 import CookieBanner from './components/CookieBanner.vue'
 import Footer from './components/Footer.vue'
 import GlobalBackground from './components/GlobalBackground.vue'
+import MobileContactCta from './components/MobileContactCta.vue'
 import Navbar from './components/Navbar.vue'
 
 const route = useRoute()
@@ -98,5 +100,18 @@ useHead(() => ({
 .page-fade-leave-to {
   opacity: 0;
   transform: translateY(8px);
+}
+
+@media (max-width: 767px) {
+  .page-fade-enter-active,
+  .page-fade-leave-active {
+    transition: none;
+  }
+
+  .page-fade-enter-from,
+  .page-fade-leave-to {
+    opacity: 1;
+    transform: none;
+  }
 }
 </style>

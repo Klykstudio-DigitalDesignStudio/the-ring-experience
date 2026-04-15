@@ -6,6 +6,7 @@ const OurOffers = () => import('./pages/OurOffers.vue')
 const Gemstones = () => import('./pages/Gemstones.vue')
 const Gallery = () => import('./pages/Gallery.vue')
 const BookExperience = () => import('./pages/BookExperience.vue')
+const FaqPage = () => import('./pages/FaqPage.vue')
 const PrivacyPolicy = () => import('./pages/PrivacyPolicy.vue')
 const CookiePolicy = () => import('./pages/CookiePolicy.vue')
 
@@ -73,6 +74,17 @@ const routes = [
         title: 'Book The Experience | The Ring Experience Sri Lanka',
         description:
           'Book your sterling silver ring-making session in Sri Lanka and leave with a personal symbol of your trip.',
+      },
+    },
+  },
+  {
+    path: '/faq',
+    component: FaqPage,
+    meta: {
+      seo: {
+        title: 'FAQ | The Ring Experience Sri Lanka',
+        description:
+          'Find quick answers about timing, materials, booking, and what to expect during The Ring Experience.',
       },
     },
   },

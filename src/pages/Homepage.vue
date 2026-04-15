@@ -196,7 +196,8 @@
             </div>
         </section>
 
-  
+        <FaqPreviewSection :content="faqHomepagePreviewContent" :items="homepageFaqItems" />
+
         <SocialSection :content="cmsSocialContent" />
     </main>
 </template>
@@ -205,10 +206,12 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import Button from '../components/Button.vue';
 import Card from '../components/Card.vue';
+import FaqPreviewSection from '../components/FaqPreviewSection.vue';
 import SocialSection from '../components/SocialSection.vue';
 import defaultHeroImage from '../assets/herocover.jpeg';
 import {
     fetchGooglePlaceReviews,
+    fetchFaqPageContentFromSanity,
     fetchHomepageContentFromSanity,
     fetchOffersPageContentFromSanity,
     fetchSocialContentFromSanity,
@@ -219,6 +222,7 @@ import {
 const cmsHomepageContent = ref({});
 const cmsOffersContent = ref({});
 const cmsSocialContent = ref({});
+const cmsFaqContent = ref({});
 const googleReviews = ref([]);
 const reviewSlideIndex = ref(0);
 
@@ -268,6 +272,20 @@ const valuesContent = computed(() => ({
 }));
 const valuesItems = computed(() => (Array.isArray(valuesContent.value.items) ? valuesContent.value.items : []));
 const valuesBgStyle = computed(() => ({ backgroundImage: `url(${optimizeImageSource(valuesContent.value.backgroundImage, { width: 1600, quality: 74 })})` }));
+const faqHomepagePreviewContent = computed(() => ({
+    enabled: cmsFaqContent.value?.homepageSection?.enabled ?? true,
+    eyebrow: cmsFaqContent.value?.homepageSection?.eyebrow ?? 'Most asked',
+    heading: cmsFaqContent.value?.homepageSection?.heading ?? 'Quick answers before you book',
+    description: cmsFaqContent.value?.homepageSection?.description ?? 'Find quick answers to the questions guests ask most often before booking their ring-making experience.',
+    ctaLabel: cmsFaqContent.value?.homepageSection?.ctaLabel ?? 'See all FAQs',
+    ctaLink: cmsFaqContent.value?.homepageSection?.ctaLink ?? '/faq'
+}));
+const homepageFaqItems = computed(() => {
+    const items = Array.isArray(cmsFaqContent.value?.items) ? cmsFaqContent.value.items : [];
+    return items
+        .filter((item) => item?.showOnHomepage && item?.question && item?.answer)
+        .sort((a, b) => (a.homepageOrder ?? 999) - (b.homepageOrder ?? 999));
+});
 const heroImage = computed(() => ({
     src: optimizeImageSource(heroContent.value.image, { width: 1800, quality: 76 }),
     srcSet: toImageSrcSet(heroContent.value.image, [640, 960, 1280, 1800], { quality: 76 })
@@ -433,6 +451,8 @@ const setupHomepageAnimations = async () => {
 };
 
 const scheduleHomepageAnimations = () => {
+    if (window.innerWidth < 768) return;
+
     const runAnimations = () => {
         animationFrameId = window.requestAnimationFrame(() => {
             setupHomepageAnimations();
@@ -448,14 +468,16 @@ const scheduleHomepageAnimations = () => {
 };
 
 onMounted(async () => {
-    const [sanityHomepage, sanityOffers, sanitySocial] = await Promise.all([
+    const [sanityHomepage, sanityOffers, sanitySocial, sanityFaq] = await Promise.all([
         fetchHomepageContentFromSanity(),
         fetchOffersPageContentFromSanity(),
-        fetchSocialContentFromSanity()
+        fetchSocialContentFromSanity(),
+        fetchFaqPageContentFromSanity()
     ]);
     cmsHomepageContent.value = sanityHomepage ?? {};
     cmsOffersContent.value = sanityOffers ?? {};
     cmsSocialContent.value = sanitySocial ?? {};
+    cmsFaqContent.value = sanityFaq ?? {};
     await nextTick();
     observeReviewsEmbed();
     scheduleHomepageAnimations();

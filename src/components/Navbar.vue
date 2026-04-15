@@ -110,6 +110,7 @@ const primaryLinks = [
   { label: 'About Us', to: '/aboutus' },
   { label: 'Gemstones', to: '/gemstones' },
   { label: 'Gallery', to: '/gallery' },
+  { label: 'FAQ', to: '/faq' },
 ]
 
 const isSolid = computed(() => route.path !== '/' || hasScrolled.value || isMobileOpen.value)
